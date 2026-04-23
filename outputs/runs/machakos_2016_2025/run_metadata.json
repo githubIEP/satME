@@ -1,0 +1,132 @@
+{
+  "run_name": "machakos_2016_2025",
+  "timestamp_utc": "2026-04-23T01:24:37.269472+00:00",
+  "config": {
+    "auth": {
+      "gee_project": "gdelt-proj-489101",
+      "cdse_username": "eshum@economicsandpeace.org",
+      "cdse_password": "BugcatCoopsYou:3"
+    },
+    "run": {
+      "name": "machakos_2016_2025",
+      "reference_date": "2018-10-18"
+    },
+    "aoi": {
+      "mode": "point_radius",
+      "center": {
+        "lat": -1.5432,
+        "lon": 37.33164
+      },
+      "radius_m": 315,
+      "surrounding_boxes": true
+    },
+    "date_range": {
+      "start": "2016-01-01",
+      "end": "2025-12-31"
+    },
+    "season": {
+      "target_months": [
+        7,
+        8,
+        9
+      ],
+      "flag_only": false
+    },
+    "sources": {
+      "sentinel2": {
+        "enabled": true,
+        "collection": "COPERNICUS/S2_SR_HARMONIZED",
+        "copernicus_fallback": true,
+        "gee_cutoff_date": "2019-01-01",
+        "max_tile_cloud_pct": 60,
+        "max_aoi_cloud_pct": 20,
+        "indices": [
+          "NDVI",
+          "NDWI",
+          "NDMI"
+        ],
+        "export_geotiff": false
+      },
+      "sentinel1": {
+        "enabled": false,
+        "collection": "COPERNICUS/S1_GRD",
+        "orbit_direction": "ASCENDING",
+        "instrument_mode": "IW",
+        "polarizations": [
+          "VV",
+          "VH"
+        ],
+        "speckle_filter": "lee",
+        "indices": [
+          "RVI",
+          "VH_VV"
+        ],
+        "export_geotiff": false
+      },
+      "viirs": {
+        "enabled": false,
+        "collection": "NOAA/VIIRS/DNB/MONTHLY_V1/VCMSLCFG",
+        "min_cf_cvg": 1,
+        "export_geotiff": false
+      },
+      "planet": {
+        "enabled": false
+      },
+      "chirps": {
+        "enabled": true,
+        "collection": "UCSB-CHG/CHIRPS/DAILY",
+        "accumulation_days": 30,
+        "export_geotiff": false
+      }
+    },
+    "output": {
+      "base_dir": "outputs/runs",
+      "stats_csv": true,
+      "flag_report": true,
+      "skip_existing": true,
+      "download_method": "auto",
+      "size_threshold_km2": 25.0,
+      "drive_folder": "satme_exports"
+    },
+    "stats": {
+      "percentiles": [
+        10,
+        25,
+        50,
+        75,
+        90
+      ],
+      "include_mean": true,
+      "include_stddev": true,
+      "include_min_max": true
+    }
+  },
+  "aoi": {
+    "mode": "point_radius",
+    "center_lat": -1.5432,
+    "center_lon": 37.33164,
+    "radius_m": 315.0,
+    "area_km2": 0.3969,
+    "wkt": "POLYGON ((37.334470706887636 -1.5460296802012217, 37.334470706887636 -1.5403703197987781, 37.328809293112364 -1.5403703197987781, 37.328809293112364 -1.5460296802012217, 37.334470706887636 -1.5460296802012217))",
+    "surrounding_boxes": true,
+    "tile_labels": [
+      "center",
+      "N",
+      "NE",
+      "E",
+      "SE",
+      "S",
+      "SW",
+      "W",
+      "NW"
+    ]
+  },
+  "gee_counts": {
+    "sentinel2": {
+      "n_tile_filtered": 410,
+      "n_clean": 219,
+      "n_in_season": 47
+    }
+  },
+  "satme_version": "0.1.0"
+}

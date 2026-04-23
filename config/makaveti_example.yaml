@@ -1,0 +1,212 @@
+## Makaveti Dam study — example run config
+## See config/REFERENCE.md for full documentation of every key.
+
+# ── Authentication ─────────────────────────────────────────────────────────────
+# Copernicus credentials needed only when sentinel2.copernicus_fallback: true.
+# Register free at https://dataspace.copernicus.eu
+# Or set env vars: CDSE_USERNAME, CDSE_PASSWORD
+auth:
+  gee_project: "gdelt-proj-489101"   # override via --gee-project flag too
+  cdse_username: "eshum@economicsandpeace.org"     # your Copernicus Data Space email
+  cdse_password: ""     # your Copernicus Data Space password
+  # https_proxy: "http://proxy.company.com:8080"  # uncomment if auto-detection fails
+
+run:
+  name: "machakos2_2016_2025"       # Used for output folder naming
+  reference_date: "2018-10-18"     # Dam construction date — tags images as PRE or POST
+
+aoi:
+  mode: "point_radius"             # "point_radius" or "polygon" — see REFERENCE.md
+
+  # Mode A — point + radius (active)
+  center:
+    lat: -1.54320
+    lon: 37.33164
+  radius_m: 315                    # Half-width of bounding square in metres
+
+  # Surrounding boxes — 3×3 grid of same-size tiles (point_radius only)
+  # Produces 9× more rows in stats.csv, each tagged with an aoi_tile label:
+  #   center | N | NE | E | SE | S | SW | W | NW
+  # Tiles are contiguous and non-overlapping; each centre is 2*radius_m away.
+  # Not supported for polygon mode — leave false or omit when mode: "polygon".
+  surrounding_boxes: true
+
+  # Mode B — polygon (uncomment and set mode: "polygon")
+  # coordinates:
+  #   - [37.328163, -1.54069]
+  #   - [37.334633, -1.54069]
+  #   - [37.334633, -1.545666]
+  #   - [37.328163, -1.545666]
+  #   - [37.328163, -1.54069]     # close the ring
+
+date_range:
+  start: "2016-01-01"
+  end: "2025-12-31"
+
+season:
+  target_months: [7, 8, 9]           # August and September (long rains in Kenya)
+  flag_only: false                  # true = keep all images, flag out-of-season ones
+                                   # false = exclude out-of-season images entirely
+
+# ──────────────────────────────────────────────────────────────────────────────
+# SOURCES
+# ──────────────────────────────────────────────────────────────────────────────
+# Enable any combination of the sources below.
+# Each produces rows in stats.csv distinguished by the `source` column.
+# See REFERENCE.md for full band/index catalogs and interpretation guidance.
+# ──────────────────────────────────────────────────────────────────────────────
+
+sources:
+
+  # ── Sentinel-2 L2A — optical multispectral ──────────────────────────────────
+  # Collection : COPERNICUS/S2_SR_HARMONIZED
+  # Archive    : November 2015 – present
+  # Revisit    : ~5 days   Resolution: 10–20 m
+  # Cloud mask : Automatic (Scene Classification Layer)
+  #
+  # Available indices: NDVI, NDWI, NDMI, EVI, SAVI, MNDWI, NDBI, BSI, GNDVI
+  # (see REFERENCE.md for formulas and interpretation of each)
+  sentinel2:
+    enabled: true
+    collection: "COPERNICUS/S2_SR_HARMONIZED"
+
+    # Copernicus Data Space fallback for pre-GEE-archive L2A data
+    # GEE's S2_SR_HARMONIZED archive is incomplete before ~2019 for many tiles.
+    # When true, dates before gee_cutoff_date are sourced from the Copernicus
+    # STAC API instead (requires auth.cdse_username / auth.cdse_password).
+    copernicus_fallback: true
+    gee_cutoff_date: "2019-01-01"   # dates before this come from CDSE, not GEE
+
+    # Cloud filters — applied in sequence (tile-level first, AOI-level second)
+    max_tile_cloud_pct:   60  # Reject if >60% of the full satellite tile is cloudy
+    max_aoi_cloud_pct: 20     # Reject if >30% of YOUR AOI is cloudy (SCL-derived)
+                               # Set to 100 to skip AOI-level cloud filtering
+
+    # Spectral indices to compute (each adds columns to stats.csv)
+    # Formula examples:
+    #   NDVI = (B8 - B4) / (B8 + B4)       — vegetation health
+    #   NDWI = (B3 - B8) / (B3 + B8)       — surface water
+    #   NDMI = (B8A - B11) / (B8A + B11)   — soil/vegetation moisture
+    #   EVI  = 2.5*(B8-B4)/(B8+6*B4-7.5*B2+1) — vegetation (low saturation)
+    #   SAVI = 1.5*(B8-B4)/(B8+B4+0.5)     — vegetation on sparse/bare land
+    #   MNDWI= (B3-B11)/(B3+B11)           — water (suppresses built-up)
+    #   NDBI = (B11-B8)/(B11+B8)           — built-up surfaces
+    #   BSI  = ((B11+B4)-(B8+B2))/((B11+B4)+(B8+B2)) — bare soil
+    #   GNDVI= (B8-B3)/(B8+B3)             — chlorophyll / crop health
+    indices:
+      - NDVI
+      - NDWI
+      - NDMI
+
+    export_geotiff: false     # true = download a GeoTIFF per image per index
+                               # Files saved to: {output.base_dir}/{run.name}/geotiffs/
+
+  # ── Sentinel-1 SAR — radar (cloud-penetrating) ──────────────────────────────
+  # Collection : COPERNICUS/S1_GRD
+  # Archive    : April 2014 – present
+  # Revisit    : ~6 days   Resolution: 10 m
+  # Cloud mask : None — SAR sees through cloud cover completely
+  # Status     : STUB — not yet implemented
+  #
+  # Use alongside Sentinel-2 to fill cloud-obscured dates.
+  # VH backscatter correlates with vegetation structure.
+  # VV backscatter correlates with soil moisture and surface roughness.
+  #
+  # Available indices: RVI, VH_VV, VV_lin, VH_lin, DPSVI
+  # (see REFERENCE.md for formulas and interpretation)
+  sentinel1:
+    enabled: true
+    collection: "COPERNICUS/S1_GRD"
+    orbit_direction: "ASCENDING"    # "ASCENDING" or "DESCENDING"
+                                    # Use the same direction throughout a study
+                                    # to ensure consistent viewing geometry
+    instrument_mode: "IW"           # IW = Interferometric Wide Swath (standard for land)
+    polarizations: ["VV", "VH"]     # Dual-pol recommended for vegetation/moisture work
+    speckle_filter: "lee"           # "lee", "refined_lee", or null (no filtering)
+    # Backscatter indices — no cloud threshold needed
+    # Formula examples:
+    #   RVI    = 4*VH / (VV + VH)          — Radar Vegetation Index (0–1)
+    #   VH_VV  = VH - VV (dB)              — depolarisation ratio; soil moisture proxy
+    #   DPSVI  = VV*(VV+VH)/(4*VH)         — Dual-Pol SAR Vegetation Index
+    indices:
+      - RVI
+      - VH_VV
+    export_geotiff: false
+
+  # ── VIIRS Nighttime Lights — Suomi NPP / NOAA-20 ───────────────────────────
+  # Collection : NOAA/VIIRS/DNB/MONTHLY_V1/VCMSLCFG
+  # Archive    : April 2012 – present
+  # Temporal   : Monthly composites (not per-overpass)
+  # Resolution : ~500 m
+  # Cloud mask : Pre-applied in composite — no configuration needed
+  # Status     : STUB — not yet implemented
+  #
+  # Measures night-time radiance (nW/cm²/sr) — a proxy for:
+  #   - Economic activity and electrification
+  #   - Human settlement and urban extent
+  #   - Post-conflict / disaster recovery
+  #   - Infrastructure (roads, industrial sites)
+  #
+  # Output: one row per month per AOI with avg_rad statistics.
+  # avg_rad_mean < 0.5 → rural/uninhabited
+  # avg_rad_mean 0.5–5 → small towns / dispersed settlement
+  # avg_rad_mean > 5   → urban / industrial
+  viirs:
+    enabled: false
+    collection: "NOAA/VIIRS/DNB/MONTHLY_V1/VCMSLCFG"
+    # collection: "NOAA/VIIRS/DNB/ANNUAL_V1"   # annual composites — less noisy
+    min_cf_cvg: 1             # Minimum cloud-free nights contributing to composite
+                               # Pixels below this are masked as unreliable
+    export_geotiff: false     # true = download monthly radiance rasters
+
+  # ── Planet ──────────────────────────────────────────────────────────────────
+  # Status: STUB — requires a Planet API key and license
+  planet:
+    enabled: false
+
+  # ── CHIRPS Rainfall — ancillary precipitation product ──────────────────────
+  # Collection : UCSB-CHG/CHIRPS/DAILY
+  # Archive    : January 1981 – present (~3-week lag)
+  # Resolution : ~5.5 km   Type: modelled (not a satellite sensor)
+  #
+  # Appends a chirps_{N}d_mm column to every stats.csv row.
+  # Value = mean accumulated rainfall in mm over the AOI for the N days
+  # before each satellite image acquisition date.
+  chirps:
+    enabled: true
+    collection: "UCSB-CHG/CHIRPS/DAILY"
+    accumulation_days: 30          # N-day rainfall accumulation window
+                                   # 7  = short-term (flash flooding / soil saturation)
+                                   # 30 = monthly (standard vegetation moisture driver)
+                                   # 90 = seasonal drought index
+    export_geotiff: false          # true = download accumulated rainfall rasters
+
+# ──────────────────────────────────────────────────────────────────────────────
+# OUTPUT
+# ──────────────────────────────────────────────────────────────────────────────
+
+output:
+  base_dir: "outputs/runs"
+  stats_csv: true
+  flag_report: true
+  skip_existing: true              # Skip re-downloading GeoTIFFs already on disk
+
+  # GeoTIFF download method (only relevant if any source has export_geotiff: true)
+  # "auto"  = getDownloadUrl for AOIs < size_threshold_km2, else Drive export
+  # "local" = always use getDownloadUrl (fast, no Drive required)
+  # "drive" = always export to Google Drive first
+  download_method: "auto"
+  size_threshold_km2: 25.0        # AOIs larger than this prefer Drive export
+  drive_folder: "satme_exports"   # Google Drive folder (only used for Drive export)
+
+# ──────────────────────────────────────────────────────────────────────────────
+# STATISTICS
+# ──────────────────────────────────────────────────────────────────────────────
+# Controls which statistics are computed per index per image over the AOI.
+# All stats are computed on valid (non-cloud-masked) pixels only.
+
+stats:
+  percentiles: [10, 25, 50, 75, 90]   # Each becomes a {INDEX}_p{N} column
+  include_mean:    true                # {INDEX}_mean
+  include_stddev:  true                # {INDEX}_std
+  include_min_max: true                # {INDEX}_min and {INDEX}_max

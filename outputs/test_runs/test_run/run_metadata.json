@@ -1,0 +1,92 @@
+{
+  "run_name": "test_run",
+  "timestamp_utc": "2026-04-21T04:59:09.441438",
+  "config": {
+    "run": {
+      "name": "test_run",
+      "reference_date": "2018-10-18"
+    },
+    "auth": {
+      "gee_project": "gdelt-proj-489101"
+    },
+    "aoi": {
+      "mode": "point_radius",
+      "center": {
+        "lat": -1.54351,
+        "lon": 37.33258
+      },
+      "radius_m": 500
+    },
+    "date_range": {
+      "start": "2020-01-01",
+      "end": "2020-06-30"
+    },
+    "season": {
+      "target_months": [
+        8,
+        9
+      ],
+      "flag_only": true
+    },
+    "sources": {
+      "sentinel2": {
+        "enabled": true,
+        "collection": "COPERNICUS/S2_SR_HARMONIZED",
+        "max_tile_cloud_pct": 50,
+        "max_aoi_cloud_pct": 30,
+        "indices": [
+          "NDVI",
+          "NDMI"
+        ],
+        "export_geotiff": false
+      },
+      "sentinel1": {
+        "enabled": false
+      },
+      "viirs": {
+        "enabled": false
+      },
+      "chirps": {
+        "enabled": true,
+        "collection": "UCSB-CHG/CHIRPS/DAILY",
+        "accumulation_days": 30,
+        "export_geotiff": false
+      }
+    },
+    "output": {
+      "base_dir": "outputs/test_runs",
+      "stats_csv": true,
+      "flag_report": true,
+      "skip_existing": false,
+      "download_method": "local"
+    },
+    "stats": {
+      "percentiles": [
+        25,
+        50,
+        75
+      ],
+      "include_mean": true,
+      "include_stddev": true,
+      "include_min_max": true
+    }
+  },
+  "aoi": {
+    "mode": "point_radius",
+    "center_lat": -1.54351,
+    "center_lon": 37.33258,
+    "radius_m": 500.0,
+    "area_km2": 1.0,
+    "wkt": "POLYGON ((37.337073186190935 -1.548001555874955, 37.337073186190935 -1.539018444125045, 37.328086813809065 -1.539018444125045, 37.328086813809065 -1.548001555874955, 37.337073186190935 -1.548001555874955))"
+  },
+  "gee_counts": {
+    "sentinel2": {
+      "total": 36,
+      "after_tile_cloud_filter": 20
+    },
+    "chirps": {
+      "total": 181
+    }
+  },
+  "satme_version": "0.1.0"
+}
