@@ -227,12 +227,10 @@ def run(cfg: dict, skip_confirm: bool = False) -> Path:
         # ── (e) CDSE: pre-cutoff Sentinel-2 L2A from Copernicus Data Space ────
         n_tile_cdse = 0
         if use_cdse:
-            if not _cdse_token_mgr:
+            if not _cdse_session:
                 logger.warning(
-                    "copernicus_fallback is enabled for sentinel2 but no CDSE "
-                    "credentials were found.  Set auth.cdse_username / "
-                    "auth.cdse_password in the YAML or CDSE_USERNAME / "
-                    "CDSE_PASSWORD environment variables.  Skipping pre-%s data.",
+                    "copernicus_fallback is enabled for sentinel2 but no HTTP "
+                    "session is available.  Skipping pre-%s data.",
                     gee_cutoff,
                 )
             else:
@@ -247,7 +245,7 @@ def run(cfg: dict, skip_confirm: bool = False) -> Path:
                     )
                     n_tile_cdse = len(cdse_items_all)
 
-                    token = _cdse_token_mgr.get_token()
+                    token = _cdse_token_mgr.get_token() if _cdse_token_mgr else ""
                     print(
                         f"  CDSE: {n_tile_cdse} candidates found — checking AOI cloud cover…"
                     )

@@ -139,11 +139,14 @@ class TokenManager:
         return self._token
 
 
-def from_cfg(cfg: dict) -> "tuple[TokenManager, requests.Session] | tuple[None, None]":
+def from_cfg(cfg: dict) -> "tuple[TokenManager | None, requests.Session | None]":
     """Build a TokenManager + Session from config + environment variables.
 
-    Returns ``(None, None)`` if no credentials are available (Copernicus
-    fallback will be skipped with a warning).
+    Returns ``(None, session)`` if no credentials are available — the session
+    is still needed for public CDSE OData catalog searches and Microsoft
+    Planetary Computer COG reads, neither of which requires a bearer token.
+
+    Returns ``(None, None)`` only if session construction itself fails.
     """
     auth_cfg = cfg.get("auth", {})
     username = (
@@ -154,8 +157,16 @@ def from_cfg(cfg: dict) -> "tuple[TokenManager, requests.Session] | tuple[None, 
         auth_cfg.get("cdse_password")
         or os.environ.get("CDSE_PASSWORD", "")
     )
-    if not username or not password:
-        return None, None
 
     session = build_session(cfg)
+
+    if not username or not password:
+        logger.info(
+            "No CDSE credentials found — CDSE catalog search will still run "
+            "but band reads will use Microsoft Planetary Computer (MPC) COGs only. "
+            "Set auth.cdse_username / auth.cdse_password (or CDSE_USERNAME / "
+            "CDSE_PASSWORD env vars) to enable CDSE direct downloads as fallback."
+        )
+        return None, session
+
     return TokenManager(username, password, session), session

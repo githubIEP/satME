@@ -2,13 +2,22 @@
 ## See config/REFERENCE.md for full documentation of every key.
 
 # ── Authentication ─────────────────────────────────────────────────────────────
-# Copernicus credentials needed only when sentinel2.copernicus_fallback: true.
-# Register free at https://dataspace.copernicus.eu
-# Or set env vars: CDSE_USERNAME, CDSE_PASSWORD
+# gee_project   REQUIRED — your Google Earth Engine cloud project ID.
+#               Create one at https://code.earthengine.google.com and enable the
+#               Earth Engine API.  Override on the CLI with --gee-project.
+#
+# cdse_username / cdse_password   OPTIONAL — Copernicus Data Space credentials.
+#               Band reads for pre-2019 Sentinel-2 data now use Microsoft
+#               Planetary Computer (MPC) COGs by default — no CDSE login needed.
+#               CDSE credentials are only needed if MPC does not have a product
+#               and you want a direct CDSE Nodes download as a last resort.
+#               Register free at https://dataspace.copernicus.eu
+#               Alternative: set env vars CDSE_USERNAME and CDSE_PASSWORD instead
+#               of storing credentials in this file.
 auth:
-  gee_project: "gdelt-proj-489101"   # override via --gee-project flag too
-  cdse_username: "eshum@economicsandpeace.org"     # your Copernicus Data Space email
-  cdse_password: ""     # your Copernicus Data Space password
+  gee_project: ""   # <-- set your GEE project ID here, or use --gee-project flag
+  # cdse_username: ""   # optional — see note above
+  # cdse_password: ""   # optional — prefer env vars CDSE_USERNAME / CDSE_PASSWORD
   # https_proxy: "http://proxy.company.com:8080"  # uncomment if auto-detection fails
 
 run:
@@ -72,8 +81,9 @@ sources:
 
     # Copernicus Data Space fallback for pre-GEE-archive L2A data
     # GEE's S2_SR_HARMONIZED archive is incomplete before ~2019 for many tiles.
-    # When true, dates before gee_cutoff_date are sourced from the Copernicus
-    # STAC API instead (requires auth.cdse_username / auth.cdse_password).
+    # When true, dates before gee_cutoff_date are sourced via the Copernicus
+    # STAC catalog; band reads use Microsoft Planetary Computer COGs (no login
+    # required).  CDSE credentials are only needed as a last-resort fallback.
     copernicus_fallback: true
     gee_cutoff_date: "2019-01-01"   # dates before this come from CDSE, not GEE
 
