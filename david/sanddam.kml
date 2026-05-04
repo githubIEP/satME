@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document id="document">
+	<name>Untitled map</name>
+	<gx:CascadingStyle kml:id="__managed_style_2A066DA19C3F260B1509">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>6</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<displayMode>hide</displayMode>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_1311336CB93F260B1509">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/document/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>4</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+				<displayMode>hide</displayMode>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_0B1AD3FA8E3F260B1509">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_1311336CB93F260B1509</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_2A066DA19C3F260B1509</styleUrl>
+		</Pair>
+	</StyleMap>
+	<GroundOverlay id="06352D1B9B3F260B1500">
+		<name>Agricultural landscape understanding</name>
+		<LookAt>
+			<longitude>82.78</longitude>
+			<latitude>21.92</latitude>
+			<altitude>0</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>30</gx:fovy>
+			<range>10000000</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_0B1AD3FA8E3F260B1509</styleUrl>
+		<drawOrder>1</drawOrder>
+		<Icon>
+			<href>data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==</href>
+		</Icon>
+		<LatLonBox>
+			<north>85</north>
+			<south>-85</south>
+			<east>180</east>
+			<west>-180</west>
+		</LatLonBox>
+		<gx:MapTilePyramid>
+			<Link>
+				<href>earthdatalayer:0:CAESJDcxN2Q1MTY5LTlhMDYtNDQ2MS1iZjNlLTBjMjQ5NjNmZTZkYw</href>
+			</Link>
+			<gx:minLevel>0</gx:minLevel>
+			<gx:maxLevel>22</gx:maxLevel>
+		</gx:MapTilePyramid>
+	</GroundOverlay>
+	<Placemark id="0A12F1C6743F260C31E0">
+		<name>Untitled path</name>
+		<LookAt>
+			<longitude>37.33197271197287</longitude>
+			<latitude>-1.543268272856513</latitude>
+			<altitude>1332.655089451903</altitude>
+			<heading>358.3816893112176</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>1067.082211701781</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_0B1AD3FA8E3F260B1509</styleUrl>
+		<LineString>
+			<coordinates>
+				37.33260404118732,-1.543574597535948,0 37.33207742068415,-1.544583424540105,0 37.33142260291398,-1.544476530768131,0 37.33122820215326,-1.544236904375691,0 37.33102716539845,-1.544144706376133,0 37.33094712156976,-1.54393763434208,0 37.33098497716151,-1.543704711159945,0 37.33091416910607,-1.543433443161917,0 37.33081722979621,-1.543008984250757,0 37.33073338601033,-1.542835530006325,0 37.33029616688925,-1.542621271312193,0 37.33023754318548,-1.542367040899568,0 37.33003736068873,-1.542100569930316,0 37.32973263093129,-1.5418399385363,0 37.32952972942057,-1.541939605980255,0 37.32939304356376,-1.542049894454177,0 37.32924235885627,-1.54228227059552,0 37.32904489238376,-1.542473545436075,0 37.32874678981019,-1.542674376518875,0 37.32853021276761,-1.542823409369656,0 
+			</coordinates>
+		</LineString>
+	</Placemark>
+</Document>
+</kml>

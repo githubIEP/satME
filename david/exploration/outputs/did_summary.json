@@ -1,0 +1,211 @@
+{
+  "config": {
+    "treatment": {
+      "name": "treatment_dam",
+      "lat": -1.5435,
+      "lon": 37.3326
+    },
+    "control": {
+      "name": "control",
+      "lat": -1.543,
+      "lon": 37.378
+    },
+    "half_size_m": 500,
+    "construction_date": "2018-10-01",
+    "drought_window": [
+      "2020-10-01",
+      "2023-06-30"
+    ],
+    "ndvi_threshold": 0.3,
+    "min_valid_fraction": 0.85,
+    "doy_bin_size": 10,
+    "cache_version": "45bead69",
+    "dry_season_months": [
+      6,
+      7,
+      8,
+      9
+    ],
+    "kml_paths": [
+      "/home/david/github/design_handoff_devsat/backend/sanddam.kml",
+      "/home/david/github/design_handoff_devsat/backend/sandam-upstream.kml"
+    ]
+  },
+  "n_scenes": {
+    "treatment_all": 200,
+    "treatment_dry_season": 56,
+    "control_all": 191,
+    "control_dry_season": 55
+  },
+  "trend": {
+    "treatment": {
+      "label": "treatment",
+      "n_years": 10,
+      "annual_medians": {
+        "2016": 0.6575247524752476,
+        "2017": 0.27361386138613863,
+        "2018": 0.9272013460459899,
+        "2019": 0.4582167133146741,
+        "2020": 0.904950495049505,
+        "2021": 0.894950495049505,
+        "2022": 0.04099009900990099,
+        "2023": 0.32048166978860043,
+        "2024": 0.7089108910891089,
+        "2025": 0.04782178217821782
+      },
+      "slope_per_year": -0.03638174249281351,
+      "ci_lo": -0.1363299438051913,
+      "ci_hi": 0.061856435643564356,
+      "mann_kendall_p": 0.38071979717813054,
+      "direction": "decreased",
+      "significant": false
+    },
+    "control": {
+      "label": "control",
+      "n_years": 10,
+      "annual_medians": {
+        "2016": 0.44174256118968697,
+        "2017": 0.3428540270825815,
+        "2018": 0.8308537954332056,
+        "2019": 0.18823067469773502,
+        "2020": 0.8228017385071841,
+        "2021": 0.6688118811881189,
+        "2022": 0.0034653465346534654,
+        "2023": 0.009179363495700553,
+        "2024": 0.9121782178217822,
+        "2025": 0.011714854743392891
+      },
+      "slope_per_year": -0.044762827800508616,
+      "ci_lo": -0.11701984866997325,
+      "ci_hi": 0.08112211221122112,
+      "mann_kendall_p": 0.6006536596119929,
+      "direction": "decreased",
+      "significant": false
+    }
+  },
+  "pixel_did": {
+    "treatment_mean_diff": -0.17081241309642792,
+    "control_mean_diff": -0.26076996326446533,
+    "did_mean": 0.08995755761861801,
+    "did_pixels_positive": 6618,
+    "did_pixels_negative": 3476,
+    "did_pixels_total_usable": 10100
+  },
+  "corridor_summary": [
+    {
+      "ring": "0-50m",
+      "n_pixels": 1744,
+      "pre_mean": 0.8376027331804281,
+      "post_mean": 0.5590412361763762,
+      "delta": -0.2785614970040519
+    },
+    {
+      "ring": "50-100m",
+      "n_pixels": 1755,
+      "pre_mean": 0.7236657169990504,
+      "post_mean": 0.5161384012823509,
+      "delta": -0.20752731571669944
+    },
+    {
+      "ring": "100-250m",
+      "n_pixels": 3267,
+      "pre_mean": 0.6373188960310172,
+      "post_mean": 0.47071691211776273,
+      "delta": -0.1666019839132545
+    },
+    {
+      "ring": "250-500m",
+      "n_pixels": 2923,
+      "pre_mean": 0.5549468093771891,
+      "post_mean": 0.42290168097017583,
+      "delta": -0.13204512840701327
+    },
+    {
+      "ring": "500-1000m",
+      "n_pixels": 411,
+      "pre_mean": 0.5089749160004634,
+      "post_mean": 0.4022274635605408,
+      "delta": -0.10674745243992265
+    }
+  ],
+  "corridor_by_segment": {
+    "downstream": [
+      {
+        "ring": "0-50m",
+        "n_pixels": 995,
+        "pre_mean": 0.8936850921273032,
+        "post_mean": 0.5445759306801359,
+        "delta": -0.3491091614471673
+      },
+      {
+        "ring": "50-100m",
+        "n_pixels": 1102,
+        "pre_mean": 0.7669880520266182,
+        "post_mean": 0.5192330924170164,
+        "delta": -0.24775495960960187
+      },
+      {
+        "ring": "100-250m",
+        "n_pixels": 2611,
+        "pre_mean": 0.6970860462147326,
+        "post_mean": 0.49353569002926984,
+        "delta": -0.20355035618546272
+      },
+      {
+        "ring": "250-500m",
+        "n_pixels": 4329,
+        "pre_mean": 0.5859294734294734,
+        "post_mean": 0.46412427378798604,
+        "delta": -0.12180519964148735
+      },
+      {
+        "ring": "500-1000m",
+        "n_pixels": 1063,
+        "pre_mean": 0.5204268019531426,
+        "post_mean": 0.3840230256492573,
+        "delta": -0.13640377630388523
+      }
+    ],
+    "upstream": [
+      {
+        "ring": "0-50m",
+        "n_pixels": 820,
+        "pre_mean": 0.771189024390244,
+        "post_mean": 0.5687956533110577,
+        "delta": -0.20239337107918623
+      },
+      {
+        "ring": "50-100m",
+        "n_pixels": 878,
+        "pre_mean": 0.690632118451025,
+        "post_mean": 0.5173204498015672,
+        "delta": -0.17331166864945788
+      },
+      {
+        "ring": "100-250m",
+        "n_pixels": 2779,
+        "pre_mean": 0.6245232097876935,
+        "post_mean": 0.4812862237759493,
+        "delta": -0.14323698601174406
+      },
+      {
+        "ring": "250-500m",
+        "n_pixels": 4550,
+        "pre_mean": 0.6321699372056515,
+        "post_mean": 0.442457070363953,
+        "delta": -0.18971286684169855
+      },
+      {
+        "ring": "500-1000m",
+        "n_pixels": 1073,
+        "pre_mean": 0.7395697421559491,
+        "post_mean": 0.5114503134761142,
+        "delta": -0.2281194286798348
+      }
+    ]
+  },
+  "precipitation": {
+    "pre_drought_mm_per_year": 1010.7635878962537,
+    "drought_mm_per_year": 716.9762724550899
+  }
+}

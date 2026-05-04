@@ -1,0 +1,12 @@
+fastapi>=0.110
+uvicorn[standard]>=0.27
+pydantic>=2.5
+numpy>=1.26
+scipy>=1.11
+
+# Optional — only needed for real Sentinel-2 fetch (set --real on the CLI).
+# The synthetic raster path works without these.
+# pystac-client>=0.7
+# planetary-computer>=1.0
+# rioxarray>=0.15
+# rasterio>=1.3
