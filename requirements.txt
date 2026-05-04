@@ -8,5 +8,16 @@ pandas>=2.0.0
 shapely>=2.0.0
 tqdm>=4.65.0
 requests>=2.31.0
+# Phase 4 — sand-dam impact report (only required when report.enabled: true)
+xarray>=2023.1.0
+rioxarray>=0.15.0
+zarr>=2.16.0
+scipy>=1.10.0
+matplotlib>=3.7.0
+pyproj>=3.5.0
+# MPC fallback for pre-2019 Sentinel-2 (Phase 4 only)
+pystac-client>=0.7.0
+planetary-computer>=1.0.0
+odc-stac>=0.3.0
 # planet SDK — install separately when license obtained:
 # planet>=2.0.0

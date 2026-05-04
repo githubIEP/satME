@@ -609,6 +609,19 @@ def run(cfg: dict, skip_confirm: bool = False) -> Path:
                     output_cfg=output_cfg,
                 )
 
+    # ══════════════════════════════════════════════════════════════════════
+    # PHASE 4 — Sand-dam impact report (optional)
+    # ══════════════════════════════════════════════════════════════════════
+    if cfg.get("report", {}).get("enabled", False):
+        print(f"\n{'─' * 65}")
+        print(f"  Phase 4/4 — Building sand-dam impact report …")
+        print(f"{'─' * 65}")
+        try:
+            _run_report_phase(cfg, out_dir)
+        except Exception as exc:
+            logger.exception("Report phase failed: %s", exc)
+            print(f"\nWARNING: Report phase failed — {exc}")
+
     # ── Completion summary ────────────────────────────────────────────────
     print(f"\n{'═' * 65}")
     print(f"  Run complete: {run_name}")
@@ -620,6 +633,209 @@ def run(cfg: dict, skip_confirm: bool = False) -> Path:
     print(f"  {'Total rows in stats.csv':<40}: {len(all_rows)}")
     print(f"{'═' * 65}\n")
     return out_dir
+
+
+def _run_report_phase(cfg: dict, out_dir: Path) -> None:
+    """Phase 4 — build per-AOI Sentinel-2 cubes, run pre/post analysis,
+    render figures + REPORT.md.
+
+    Imports for the analysis layer are deferred so satme runs that don't
+    enable the report don't pay the xarray/rasterio/scipy import cost.
+    """
+    import json
+
+    import numpy as np
+    import pandas as pd
+
+    from satme.analysis import (
+        _runtime_config,
+        aggregate,
+        cache,
+        fetch,
+        precipitation,
+        report as report_renderer,
+        stats as analysis_stats,
+        visualisation as viz,
+    )
+
+    _runtime_config.configure(cfg, out_dir)
+    cfgrt = _runtime_config
+
+    out = cfgrt.OUTPUTS_DIR
+    figs = out
+
+    # ── Build / load per-AOI Sentinel-2 cubes ─────────────────────────────
+    print("\n=== ingesting Sentinel-2 cubes from GEE ===")
+    ds_t = fetch.build_or_load(
+        cfgrt.TREATMENT_NAME, cfgrt.TREATMENT_LAT, cfgrt.TREATMENT_LON,
+        cfgrt.HALF_SIZE_M, cfg,
+    )
+    ds_c = fetch.build_or_load(
+        cfgrt.CONTROL_NAME,   cfgrt.CONTROL_LAT,   cfgrt.CONTROL_LON,
+        cfgrt.HALF_SIZE_M, cfg,
+    )
+
+    if ds_t.sizes != ds_c.sizes:
+        ny = min(ds_t.sizes["y"], ds_c.sizes["y"])
+        nx = min(ds_t.sizes["x"], ds_c.sizes["x"])
+        print(f"  AOI shape mismatch — cropping both to (y={ny}, x={nx})")
+        ds_t = ds_t.isel(y=slice(0, ny), x=slice(0, nx))
+        ds_c = ds_c.isel(y=slice(0, ny), x=slice(0, nx))
+
+    season       = cfgrt.DRY_SEASON_MONTHS
+    season_label = (
+        f"dry season (months {season})" if season else "all months"
+    )
+
+    # ── Per-scene aggregate time series ───────────────────────────────────
+    print("\n=== per-scene aggregate time series ===")
+    df_t = aggregate.aggregate_timeseries(ds_t, cfgrt.TREATMENT_NAME)
+    df_c = aggregate.aggregate_timeseries(ds_c, cfgrt.CONTROL_NAME)
+    df_all = pd.concat([df_t, df_c], ignore_index=True)
+    ts_csv = out / "full_timeseries.csv"
+    df_all.to_csv(ts_csv, index=False)
+    print(f"  wrote {ts_csv} ({len(df_all)} rows)")
+
+    df_t_season = df_t[df_t["month"].isin(season)] if season else df_t
+    df_c_season = df_c[df_c["month"].isin(season)] if season else df_c
+
+    # ── Per-pixel pre/post (dry-season) ────────────────────────────────────
+    print(f"\n=== per-pixel pre/post — {season_label} ===")
+    _, _, arr_t = aggregate.pixel_diff_map(ds_t, season_months=season)
+    _, _, arr_c = aggregate.pixel_diff_map(ds_c, season_months=season)
+    arr_did = arr_t - arr_c
+
+    # ── Corridor summary (combined + per-segment) ─────────────────────────
+    print("\n=== ring corridor summary ===")
+    rows = aggregate.corridor_summary(
+        ds_t, cfgrt.KML_PATHS, season_months=season,
+    )
+    pd.DataFrame(rows).to_csv(out / "corridor_summary.csv", index=False)
+
+    rows_seg: dict[str, list[dict]] = {}
+    if len(cfgrt.KML_PATHS) >= 2:
+        # By default we treat the first KML as upstream, second as downstream.
+        # The Machakos KMLs are named the opposite of their actual flow direction
+        # (see david/exploration/scripts/step03_run_analysis.py for the elevation
+        # check). The user can re-order channel_kmls in the YAML to match flow.
+        upstream_kml   = cfgrt.KML_PATHS[0]
+        downstream_kml = cfgrt.KML_PATHS[1]
+        rows_seg["upstream"] = aggregate.corridor_summary(
+            ds_t, [upstream_kml], season_months=season,
+        )
+        rows_seg["downstream"] = aggregate.corridor_summary(
+            ds_t, [downstream_kml], season_months=season,
+        )
+        pd.DataFrame(
+            [{"segment": "upstream",   **r} for r in rows_seg["upstream"]]
+            + [{"segment": "downstream", **r} for r in rows_seg["downstream"]]
+        ).to_csv(out / "corridor_by_segment.csv", index=False)
+
+    # ── Trend tests ────────────────────────────────────────────────────────
+    print("\n=== trend / DiD scalars ===")
+    trend_t = analysis_stats.trend_one("treatment", df_t_season)
+    trend_c = analysis_stats.trend_one("control",   df_c_season)
+    pixel_summary = analysis_stats.pixel_summary(arr_t, arr_c, arr_did)
+    mw = analysis_stats.mannwhitney_block(df_t_season, df_c_season)
+
+    # ── Precipitation (CHIRPS via GEE) ────────────────────────────────────
+    print("\n=== precipitation (CHIRPS via GEE) ===")
+    df_precip_daily   = precipitation.load_or_fetch()
+    df_precip_monthly = precipitation.to_monthly(df_precip_daily)
+    df_precip_monthly.to_csv(out / "chirps_monthly.csv", index=False)
+
+    drought_total = df_precip_daily.loc[
+        (df_precip_daily["date"] >= cfgrt.DROUGHT_START)
+        & (df_precip_daily["date"] <= cfgrt.DROUGHT_END), "precip_mm",
+    ].sum()
+    pre_drought_total = df_precip_daily.loc[
+        df_precip_daily["date"] < cfgrt.DROUGHT_START, "precip_mm",
+    ].sum()
+    pre_drought_years = (
+        (cfgrt.DROUGHT_START - df_precip_daily["date"].min()).days / 365.25
+    )
+    drought_years = (
+        (cfgrt.DROUGHT_END - cfgrt.DROUGHT_START).days / 365.25
+    )
+
+    summary = {
+        "config": {
+            "treatment": {"name": cfgrt.TREATMENT_NAME,
+                          "lat": cfgrt.TREATMENT_LAT, "lon": cfgrt.TREATMENT_LON},
+            "control":   {"name": cfgrt.CONTROL_NAME,
+                          "lat": cfgrt.CONTROL_LAT,   "lon": cfgrt.CONTROL_LON},
+            "half_size_m":         cfgrt.HALF_SIZE_M,
+            "construction_date":   str(cfgrt.DAM_CONSTRUCTION_DATE.date()),
+            "drought_window":      [str(cfgrt.DROUGHT_START.date()),
+                                    str(cfgrt.DROUGHT_END.date())],
+            "ndvi_threshold":      cfgrt.NDVI_VEG_THRESHOLD,
+            "min_valid_fraction":  cfgrt.MIN_VALID_FRACTION,
+            "doy_bin_size":        cfgrt.DOY_BIN_SIZE,
+            "cache_version":       cfgrt.CACHE_VERSION,
+            "dry_season_months":   season,
+            "kml_paths":           [str(p) for p in cfgrt.KML_PATHS],
+        },
+        "n_scenes": {
+            "treatment_all":        len(df_t),
+            "treatment_dry_season": len(df_t_season),
+            "control_all":          len(df_c),
+            "control_dry_season":   len(df_c_season),
+        },
+        "trend":              {"treatment": trend_t, "control": trend_c},
+        "pixel_did":          pixel_summary,
+        "mannwhitney":        mw,
+        "corridor_summary":   rows,
+        "corridor_by_segment": rows_seg,
+        "precipitation": {
+            "source":               "CHIRPS via GEE",
+            "pre_drought_mm_per_year": float(pre_drought_total / pre_drought_years)
+                                        if pre_drought_years > 0 else None,
+            "drought_mm_per_year":  float(drought_total / drought_years)
+                                        if drought_years > 0 else None,
+        },
+    }
+    summary_path = out / "did_summary.json"
+    with open(summary_path, "w") as f:
+        json.dump(summary, f, indent=2, default=str)
+    print(f"  wrote {summary_path}")
+
+    # ── Render figures ─────────────────────────────────────────────────────
+    print("\n=== rendering figures ===")
+    viz.render_site_methodology(ds_t, figs / "site_methodology.png")
+    viz.render_yearly_ndvi_grid(
+        ds_t, figs / "yearly_ndvi_grid.png",
+        season_months=season, season_label=season_label,
+    )
+    viz.render_per_pixel_change_simplified(
+        arr_t, ds_t, figs / "per_pixel_change_treatment.png",
+        aoi_label="Treatment",
+    )
+    viz.render_per_pixel_change(
+        arr_t, "Treatment (technical)",
+        figs / "per_pixel_change_treatment_technical.png",
+    )
+    viz.render_per_pixel_change(
+        arr_c, "Control (technical)",
+        figs / "per_pixel_change_control.png",
+    )
+    viz.render_did_map(arr_did, figs / "per_pixel_did.png")
+    viz.render_corridor_decay(rows, figs / "corridor_decay.png")
+    if rows_seg:
+        viz.render_corridor_decay_comparison(
+            rows_seg["upstream"], rows_seg["downstream"],
+            label_left="Upstream of dam wall",
+            label_right="Downstream of dam wall",
+            out_path=figs / "corridor_decay_by_segment.png",
+        )
+    viz.render_timeseries_with_precip(
+        df_all, df_precip_monthly, figs / "timeseries_with_precip.png",
+    )
+
+    # ── Render REPORT.md ───────────────────────────────────────────────────
+    report_name = cfg.get("report", {}).get("output", "report.md")
+    report_path = out / report_name
+    report_renderer.render(summary, figs, report_path)
+    print(f"\n  wrote {report_path}")
 
 
 def _print_filter_summary(phase1: dict, cfg: dict) -> None:

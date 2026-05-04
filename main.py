@@ -132,7 +132,7 @@ import yaml
 REQUIRED_FIELDS = [
     ("run", "name"),
     ("run", "reference_date"),
-    ("aoi", "mode"),
+    ("aoi",),
     ("date_range", "start"),
     ("date_range", "end"),
     ("sources",),
@@ -152,8 +152,65 @@ def _validate_config(cfg: dict) -> list[str]:
                 break
             obj = obj[key]
 
-    # AOI mode-specific validation
+    # When report.enabled is true the AOI is given as treatment + control sub-blocks.
+    # We populate the legacy single-AOI keys (aoi.mode/center/radius_m) from
+    # aoi.treatment so the rest of satme works without changes.
     aoi = cfg.get("aoi", {})
+    report_cfg = cfg.get("report", {}) or {}
+    report_enabled = bool(report_cfg.get("enabled", False))
+
+    if report_enabled:
+        treat = aoi.get("treatment")
+        ctrl  = aoi.get("control")
+        if not isinstance(treat, dict):
+            errors.append("aoi.treatment block is required when report.enabled is true")
+        if not isinstance(ctrl, dict):
+            errors.append("aoi.control block is required when report.enabled is true")
+        for key, sub in (("treatment", treat), ("control", ctrl)):
+            if not isinstance(sub, dict):
+                continue
+            center = sub.get("center", {})
+            if "lat" not in center or "lon" not in center:
+                errors.append(f"aoi.{key}.center must have lat and lon")
+            if "radius_m" not in sub:
+                errors.append(f"aoi.{key}.radius_m is required")
+        kmls = aoi.get("channel_kmls", [])
+        if not isinstance(kmls, list) or not kmls:
+            errors.append("aoi.channel_kmls must be a non-empty list of KML paths")
+        else:
+            from pathlib import Path as _P
+            for p in kmls:
+                if not _P(p).exists():
+                    errors.append(f"aoi.channel_kmls file does not exist: {p}")
+
+        # Mirror treatment AOI into the legacy single-AOI schema so the existing
+        # satme path (Phase 1–3) keeps working unchanged.
+        if isinstance(treat, dict) and isinstance(treat.get("center"), dict):
+            aoi.setdefault("mode", "point_radius")
+            aoi.setdefault("center", treat["center"])
+            aoi.setdefault("radius_m", treat.get("radius_m"))
+
+        # Report-specific keys
+        for k in ("dam_date",):
+            if k not in report_cfg:
+                errors.append(f"report.{k} is required when report.enabled is true")
+        dw = report_cfg.get("drought_window") or {}
+        if not isinstance(dw, dict) or "start" not in dw or "end" not in dw:
+            errors.append("report.drought_window must have 'start' and 'end' ISO dates")
+        else:
+            from datetime import date as _date
+            try:
+                _date.fromisoformat(str(dw["start"]))
+                _date.fromisoformat(str(dw["end"]))
+            except (ValueError, TypeError):
+                errors.append("report.drought_window.start/end must be ISO dates")
+        try:
+            from datetime import date as _date
+            _date.fromisoformat(str(report_cfg.get("dam_date", "")))
+        except (ValueError, TypeError):
+            errors.append("report.dam_date must be an ISO date (YYYY-MM-DD)")
+
+    # AOI mode-specific validation (legacy / non-report path)
     mode = aoi.get("mode")
     if mode == "point_radius":
         center = aoi.get("center", {})
@@ -164,7 +221,9 @@ def _validate_config(cfg: dict) -> list[str]:
     elif mode == "polygon":
         if "coordinates" not in aoi or not aoi["coordinates"]:
             errors.append("aoi.coordinates is required for polygon mode")
-    elif mode is not None:
+    elif mode is None:
+        errors.append("aoi.mode is required (or set report.enabled: true with aoi.treatment)")
+    else:
         errors.append(f"Unknown aoi.mode '{mode}' — use 'point_radius' or 'polygon'")
 
     # Date range validation
@@ -178,9 +237,13 @@ def _validate_config(cfg: dict) -> list[str]:
     except (ValueError, TypeError):
         errors.append("date_range.start and .end must be valid ISO dates (YYYY-MM-DD)")
 
-    # At least one source must be enabled
+    # At least one source must be enabled — unless only the report is being run,
+    # in which case Phase 4 fetches its own data internally.
     sources = cfg.get("sources", {})
-    if not any(v.get("enabled", False) for v in sources.values() if isinstance(v, dict)):
+    any_enabled = any(
+        v.get("enabled", False) for v in sources.values() if isinstance(v, dict)
+    )
+    if not any_enabled and not report_enabled:
         errors.append("At least one source must have enabled: true")
 
     return errors
