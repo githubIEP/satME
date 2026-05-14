@@ -1,0 +1,96 @@
+{
+  "run_name": "amukura_viirs_nightlights",
+  "timestamp_utc": "2026-05-13T03:20:51.723290+00:00",
+  "config": {
+    "auth": {
+      "gee_project": "gdelt-proj-489101"
+    },
+    "run": {
+      "name": "amukura_viirs_nightlights",
+      "reference_date": "2022-01-01"
+    },
+    "aoi": {
+      "mode": "polygon",
+      "coordinates": [
+        [
+          34.14,
+          0.42
+        ],
+        [
+          34.16,
+          0.42
+        ],
+        [
+          34.16,
+          0.44
+        ],
+        [
+          34.14,
+          0.44
+        ],
+        [
+          34.14,
+          0.42
+        ]
+      ]
+    },
+    "date_range": {
+      "start": "2019-01-01",
+      "end": "2024-12-31"
+    },
+    "season": {
+      "target_months": [],
+      "flag_only": true
+    },
+    "sources": {
+      "sentinel2": {
+        "enabled": false
+      },
+      "sentinel1": {
+        "enabled": false
+      },
+      "viirs": {
+        "enabled": true,
+        "collection": "NOAA/VIIRS/DNB/MONTHLY_V1/VCMSLCFG",
+        "min_cf_cvg": 1,
+        "indices": [
+          "avg_rad"
+        ],
+        "export_geotiff": false
+      },
+      "chirps": {
+        "enabled": false
+      }
+    },
+    "output": {
+      "base_dir": "outputs/runs",
+      "stats_csv": true,
+      "flag_report": true,
+      "skip_existing": true,
+      "download_method": "local"
+    },
+    "stats": {
+      "percentiles": [
+        25,
+        50,
+        75
+      ],
+      "include_mean": true,
+      "include_stddev": true,
+      "include_min_max": true
+    }
+  },
+  "aoi": {
+    "mode": "polygon",
+    "area_km2": 4.956717,
+    "wkt": "POLYGON ((34.14 0.42, 34.16 0.42, 34.16 0.44, 34.14 0.44, 34.14 0.42))"
+  },
+  "gee_counts": {
+    "viirs": {
+      "n_tile_filtered": 72,
+      "n_clean": 72,
+      "n_in_season": 72
+    }
+  },
+  "satme_version": "0.1.0"
+}

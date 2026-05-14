@@ -1,0 +1,78 @@
+## Amukura, Busia County (Site 04)
+## Teso South sub-county, western Kenya (near Uganda border)
+## NATURAL RAINFALL-DRIVEN — smallholder maize, sorghum, beans (Midland agro-ecological zone)
+##
+## Wet/dry season analysis
+##   Dry window  : January – February (bare/stubble, land prep)
+##   Wet window  : May – June (long rains peak, max NDVI)
+##   Recommended : compare February images vs May images
+##
+## Key cautions:
+##   - Lower rainfall than Kakamega (~1,400 mm/yr) → bare-soil windows more pronounced
+##   - Different soil type (Ferralsols vs Kakamega) — good cross-check site
+##   - Same cloud-cover constraints as Kakamega in peak wet season
+##
+## NOTE: reference_date is a mid-study marker for PRE/POST labelling only.
+##       This site has no infrastructure intervention — PRE/POST = before/after 2022.
+
+auth:
+  gee_project: ""   # set your GEE project ID here or use EARTHENGINE_PROJECT env var
+
+run:
+  name: "amukura_busia_wet_dry"
+  reference_date: "2022-01-01"   # mid-study split; not tied to an event
+
+aoi:
+  mode: "polygon"
+  # Sample polygon from site reference document — approx. 2 km × 2 km smallholder block
+  # Source coords given as (lat, lon); converted here to [lon, lat] for GEE
+  coordinates:
+    - [34.14, 0.42]   # SW
+    - [34.16, 0.42]   # SE
+    - [34.16, 0.44]   # NE
+    - [34.14, 0.44]   # NW
+    - [34.14, 0.42]   # close ring
+
+date_range:
+  start: "2019-01-01"
+  end:   "2024-12-31"
+
+season:
+  # January–February (dry/bare) + May–June (wet/green peak)
+  target_months: [1, 2, 5, 6]
+  flag_only: false   # exclude images outside the target windows
+
+sources:
+  sentinel2:
+    enabled: true
+    collection: "COPERNICUS/S2_SR_HARMONIZED"
+
+    # Cloud thresholds — raised for wet season (May–Jun cloud cover)
+    max_tile_cloud_pct: 70
+    max_aoi_cloud_pct:  40
+
+    indices:
+      - NDVI    # primary vegetation health — main wet/dry contrast metric
+      - BSI     # bare soil index — high in dry season, low in wet season
+      - NDMI    # soil/vegetation moisture
+
+    export_geotiff: false
+
+  chirps:
+    enabled: true
+    collection: "UCSB-CHG/CHIRPS/DAILY"
+    accumulation_days: 30   # monthly antecedent rainfall
+    export_geotiff: false
+
+output:
+  base_dir: "outputs/runs"
+  stats_csv: true
+  flag_report: true
+  skip_existing: true
+  download_method: "local"
+
+stats:
+  percentiles: [10, 25, 50, 75, 90]
+  include_mean:    true
+  include_stddev:  true
+  include_min_max: true

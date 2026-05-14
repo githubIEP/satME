@@ -366,7 +366,8 @@ def fetch_stats_multi_tile_batch(
             "aoi_tile": raw["aoi_tile"][i],
         }
         for gee_key in gee_keys:
-            val = raw[gee_key][i] if raw.get(gee_key) else None
+            arr = raw.get(gee_key) or []
+            val = arr[i] if i < len(arr) else None
             csv_key = gee_key.replace("_stdDev", "_std")
             row[csv_key] = _round(val)
         rows.append(row)
@@ -511,7 +512,8 @@ def fetch_stats_batch(
     for i in range(n):
         row = {"image_id": image_ids[i]}
         for gee_key in gee_keys:
-            val = raw[gee_key][i] if raw.get(gee_key) else None
+            arr = raw.get(gee_key) or []
+            val = arr[i] if i < len(arr) else None
             # Rename GEE's stdDev → std for CSV consistency
             csv_key = gee_key.replace("_stdDev", "_std")
             row[csv_key] = _round(val)

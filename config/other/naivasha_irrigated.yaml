@@ -1,0 +1,83 @@
+## Naivasha Irrigated Fields (Site 03)
+## Nakuru County, Lake Naivasha basin, Rift Valley
+## IRRIGATION-DRIVEN — cut flowers, avocado, French beans, vegetables (center-pivot)
+##
+## Use case: SPATIAL CONTRAST (irrigated vs. surrounding rain-fed land)
+##   NOT a seasonal NDVI contrast within the irrigated fields themselves —
+##   center-pivot fields stay green year-round from lake water and groundwater.
+##
+##   Best contrast window : July – August (surrounding non-irrigated land at driest)
+##   Wet window (context) : April – May (long rains — surrounding land also green,
+##                          contrast disappears — useful as a "no contrast" baseline)
+##   Recommended use      : irrigated control site; compare green circles in Aug vs
+##                          surrounding bare/dry land
+##
+## Key caution:
+##   Center-pivot circles are visually distinctive at 10m resolution.
+##   Best used as a control rather than a primary seasonal analysis site.
+##   NDVI within irrigated fields will be consistently high (~0.5–0.8) year-round.
+##
+## NOTE: reference_date is a mid-study marker for PRE/POST labelling only.
+
+auth:
+  gee_project: ""   # set your GEE project ID here or use EARTHENGINE_PROJECT env var
+
+run:
+  name: "naivasha_irrigated_contrast"
+  reference_date: "2022-01-01"   # mid-study split; not tied to an event
+
+aoi:
+  mode: "polygon"
+  # Sample polygon from site reference document — covers center-pivot irrigated block
+  # Source coords given as (lat, lon); converted here to [lon, lat] for GEE
+  coordinates:
+    - [36.42, -0.71]   # NW
+    - [36.44, -0.71]   # NE
+    - [36.44, -0.73]   # SE
+    - [36.42, -0.73]   # SW
+    - [36.42, -0.71]   # close ring
+
+date_range:
+  start: "2019-01-01"
+  end:   "2024-12-31"
+
+season:
+  # April–May (wet season reference — low spatial contrast) +
+  # July–August (dry season — maximum irrigated vs. rain-fed contrast)
+  target_months: [4, 5, 7, 8]
+  flag_only: false   # exclude images outside the target windows
+
+sources:
+  sentinel2:
+    enabled: true
+    collection: "COPERNICUS/S2_SR_HARMONIZED"
+
+    # Rift Valley — moderately dry; reasonable cloud thresholds
+    max_tile_cloud_pct: 60
+    max_aoi_cloud_pct:  25
+
+    indices:
+      - NDVI    # vegetation health — will be consistently high in irrigated fields
+      - NDWI    # surface water — useful for detecting irrigation extent
+      - BSI     # bare soil — expected to be LOW in irrigated fields, HIGH in surrounds
+
+    export_geotiff: false
+
+  chirps:
+    enabled: true
+    collection: "UCSB-CHG/CHIRPS/DAILY"
+    accumulation_days: 30
+    export_geotiff: false
+
+output:
+  base_dir: "outputs/runs"
+  stats_csv: true
+  flag_report: true
+  skip_existing: true
+  download_method: "local"
+
+stats:
+  percentiles: [10, 25, 50, 75, 90]
+  include_mean:    true
+  include_stddev:  true
+  include_min_max: true

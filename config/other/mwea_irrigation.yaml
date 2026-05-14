@@ -1,0 +1,81 @@
+## Mwea Irrigation Scheme (Site 01)
+## Kirinyaga County, ~100 km north-east of Nairobi
+## IRRIGATION-DRIVEN — irrigated rice (Basmati 370 / Pishori), ~96% of cropped area
+##
+## Wet/dry season analysis (IRRIGATION CALENDAR — NOT rainfall driven)
+##   Fallow window : February – May (post-harvest bare black cotton soil)
+##   Crop peak     : September – October (tillering/flowering, max NDVI)
+##   Recommended   : compare February images vs September images
+##
+## CRITICAL CAUTION:
+##   The meteorological dry season (Jul–Sep) is the PEAK GROWING SEASON here.
+##   Irrigation from Rivers Thiba + Nyamindi supplies crop water independently of rain.
+##   Do NOT interpret Sep as "dry" — it is peak green.
+##   Post-2022 Thiba Dam enables double-cropping; verify which cycle is active for
+##   your chosen year before interpreting results.
+##
+## NOTE: reference_date is a mid-study marker for PRE/POST labelling only.
+
+auth:
+  gee_project: ""   # set your GEE project ID here or use EARTHENGINE_PROJECT env var
+
+run:
+  name: "mwea_irrigation_wet_dry"
+  reference_date: "2022-01-01"   # mid-study split; not tied to an event
+
+aoi:
+  mode: "polygon"
+  # Sample polygon from site reference document — covers irrigated rice block
+  # Source coords given as (lat, lon); converted here to [lon, lat] for GEE
+  # Note: this is a large polygon (~4 km × 4 km); GEE download will use getDownloadUrl
+  coordinates:
+    - [37.34, -0.68]   # NW
+    - [37.38, -0.68]   # NE
+    - [37.38, -0.72]   # SE
+    - [37.34, -0.72]   # SW
+    - [37.34, -0.68]   # close ring
+
+date_range:
+  start: "2019-01-01"
+  end:   "2024-12-31"
+
+season:
+  # February–May (fallow/bare) + September–October (crop peak)
+  # This is the irrigation calendar, not the rainfall calendar
+  target_months: [2, 3, 4, 5, 9, 10]
+  flag_only: false   # exclude images outside the target windows
+
+sources:
+  sentinel2:
+    enabled: true
+    collection: "COPERNICUS/S2_SR_HARMONIZED"
+
+    # Mwea is in a relatively dry region — stricter cloud thresholds are achievable
+    max_tile_cloud_pct: 50
+    max_aoi_cloud_pct:  20
+
+    indices:
+      - NDVI    # primary crop health; near-zero in fallow, high in crop peak
+      - NDWI    # surface water — important for flooded nursery/puddling stages
+      - MNDWI   # modified NDWI — better for open water (flooding/paddies)
+
+    export_geotiff: false
+
+  chirps:
+    enabled: true
+    collection: "UCSB-CHG/CHIRPS/DAILY"
+    accumulation_days: 30   # rainfall context — note NDVI here driven by irrigation, not rain
+    export_geotiff: false
+
+output:
+  base_dir: "outputs/runs"
+  stats_csv: true
+  flag_report: true
+  skip_existing: true
+  download_method: "local"
+
+stats:
+  percentiles: [10, 25, 50, 75, 90]
+  include_mean:    true
+  include_stddev:  true
+  include_min_max: true

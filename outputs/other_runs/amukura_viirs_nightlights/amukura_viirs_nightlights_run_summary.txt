@@ -1,0 +1,49 @@
+═════════════════════════════════════════════════════════════════
+  satME Run Summary
+  Run:       amukura_viirs_nightlights
+  Generated: 2026-05-13 13:21
+  Pipeline:  satME v0.1.0
+═════════════════════════════════════════════════════════════════
+
+RUN CONFIGURATION
+─────────────────────────────────────────────────────────────────
+  Reference date:  2022-01-01
+                   (images before = PRE, on/after = POST)
+  Date range:      2019-01-01 → 2024-12-31
+  Season filter:   months [] ()
+  Season mode:     flag only (all images kept)
+
+AREA OF INTEREST
+─────────────────────────────────────────────────────────────────
+  Mode:    polygon
+  Area:    4.956717 km²
+  WKT:     POLYGON ((34.14 0.42, 34.16 0.42, 34.16 0.44, 34.14 0.44, 34.14 0.42))
+
+VIIRS FILTER PIPELINE
+─────────────────────────────────────────────────────────────────
+
+INCLUDED IN STATS  (0)  — passed all filters
+─────────────────────────────────────────────────────────────────
+  Date           Pre/Post    AOI cloud   Tile cloud  Flags
+  -----------------------------------------------------------------
+
+EXCLUDED IMAGES  (0)  — did not reach stats output
+─────────────────────────────────────────────────────────────────
+  Note: 'in_clean_set' = passed cloud filters only.
+        Season filter is applied after; out-of-season images
+        can be cloud-clean yet still excluded from stats.
+
+  By reason:
+    Tile cloud > ?% (or AOI cloud > ?%):  0
+    Cloud-clean but out of season:                  0
+    Other:                                          0
+
+
+STATISTICS COMPUTED
+─────────────────────────────────────────────────────────────────
+  Percentiles:  [25, 50, 75]
+  Mean:         yes
+  Std dev:      yes
+  Min/max:      yes
+
+═════════════════════════════════════════════════════════════════

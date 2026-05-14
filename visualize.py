@@ -337,7 +337,10 @@ def _annotate_dates(ax, dates: pd.Series, values: pd.Series) -> None:
 # ── Plot 1 — index time series (center tile) ─────────────────────────────────
 
 def plot_index_timeseries(df: pd.DataFrame, out_path: Path) -> None:
-    center = df[df["aoi_tile"] == "center"].copy().sort_values("date")
+    if "aoi_tile" in df.columns:
+        center = df[df["aoi_tile"] == "center"].copy().sort_values("date")
+    else:
+        center = df.copy().sort_values("date")
 
     has_chirps = "chirps_30d_mm" in center.columns and center["chirps_30d_mm"].notna().any()
     n_rows     = len(INDICES) + (1 if has_chirps else 0)
@@ -797,7 +800,8 @@ def main():
         if not s2_df.empty:
             # Pass reference_date context from full df by injecting a helper
             plot_index_timeseries(s2_df, run_dir / f"{run_dir.name}_index_timeseries.png")
-            plot_tile_comparison(s2_df,  run_dir / f"{run_dir.name}_tile_comparison.png")
+            if "aoi_tile" in s2_df.columns:
+                plot_tile_comparison(s2_df, run_dir / f"{run_dir.name}_tile_comparison.png")
         else:
             print("Skipping Sentinel-2 plots — no sentinel2 rows in stats.csv")
 

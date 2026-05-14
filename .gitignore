@@ -35,14 +35,21 @@ htmlcov/
 *.pem
 *.key
 
-# User configs (keep the example, ignore personal copies)
+# User configs (keep the example and primary run; ignore personal copies)
 config/*.yaml
 !config/config_example.yaml
+!config/busia_4km_full.yaml
+!config/other/
 
 # Pipeline outputs and caches
-outputs/runs/
+# Use wildcard so we can un-ignore specific run folders
+outputs/runs/*
+!outputs/runs/busia_4km_full
 outputs/test_runs/
 **/_cache_*/
+
+# Claude Code session memory — personal, not for repo
+.claude/
 
 # IDE / editor
 .vscode/

@@ -1,0 +1,74 @@
+## Machakos — Semi-arid dryland (Site 05)
+## South-eastern Kenya, semi-arid zone
+## NATURAL RAINFALL-DRIVEN — dryland rain-fed maize and sorghum
+##
+## Wet/dry season analysis
+##   Dry window  : January – February (extreme bare; near-zero NDVI ~0.0–0.1)
+##   Wet window  : May (long rains peak; NDVI rises to ~0.6)
+##   Recommended : compare February images vs May images
+##
+## Most dramatic wet/dry NDVI contrast of all sites in this reference document.
+## OND short rains (Oct–Dec) are highly variable year-to-year (ENSO-sensitive);
+## always verify rainfall onset for your specific year via the CHIRPS output.
+##
+## NOTE: reference_date is a mid-study marker for PRE/POST labelling only.
+##       This site has no infrastructure intervention — PRE/POST = before/after 2022.
+
+auth:
+  gee_project: ""   # set your GEE project ID here or use EARTHENGINE_PROJECT env var
+
+run:
+  name: "machakos_semiarid_wet_dry"
+  reference_date: "2022-01-01"   # mid-study split; not tied to an event
+
+aoi:
+  mode: "point_radius"
+  center:
+    lat: -1.516
+    lon: 37.261
+  radius_m: 1000   # 2 km × 2 km square — appropriate for semi-arid landscape analysis
+
+date_range:
+  start: "2019-01-01"
+  end:   "2024-12-31"
+
+season:
+  # January–February (extreme dry) + May (long rains peak)
+  # Also include October–November to capture the variable short rains for context
+  target_months: [1, 2, 5, 10, 11]
+  flag_only: false   # exclude images outside the target windows
+
+sources:
+  sentinel2:
+    enabled: true
+    collection: "COPERNICUS/S2_SR_HARMONIZED"
+
+    # Semi-arid zone — low rainfall means lower cloud cover; can be relatively strict
+    max_tile_cloud_pct: 50
+    max_aoi_cloud_pct:  20
+
+    indices:
+      - NDVI    # primary metric — most dramatic wet/dry contrast of all sites
+      - BSI     # bare soil index — very high in dry season; drops sharply after rains
+      - NDMI    # moisture — strongly tracks soil water availability
+
+    export_geotiff: false
+
+  chirps:
+    enabled: true
+    collection: "UCSB-CHG/CHIRPS/DAILY"
+    accumulation_days: 30   # monthly rainfall — critical context given ENSO variability
+    export_geotiff: false
+
+output:
+  base_dir: "outputs/runs"
+  stats_csv: true
+  flag_report: true
+  skip_existing: true
+  download_method: "local"
+
+stats:
+  percentiles: [10, 25, 50, 75, 90]
+  include_mean:    true
+  include_stddev:  true
+  include_min_max: true

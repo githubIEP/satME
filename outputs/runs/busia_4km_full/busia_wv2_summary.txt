@@ -1,0 +1,21 @@
+=================================================================
+  WorldView-2 vs Sentinel-2 — Busia AOI
+=================================================================
+
+  WV2 11 Feb 2025  (2.1 m/px)
+  Index       WV2 median  S2 same-month median      Diff
+  -------------------------------------------------------
+  NDVI             0.488                 0.436    +0.053
+  NDWI            -0.424                -0.494    +0.070
+
+  WV2 27 May 2025  (2.1 m/px)
+  Index       WV2 median  S2 same-month median      Diff
+  -------------------------------------------------------
+  NDVI             0.604                 0.686    -0.082
+  NDWI            -0.463                -0.610    +0.147
+
+  Notes:
+  - WV2 resolves 2 m field-scale variation; S2 averages at 10 m.
+  - Some WV2–S2 difference is a resolution/scale effect, not land change.
+  - NDRE is WV2-exclusive (no equivalent in standard S2 10 m bands).
+=================================================================

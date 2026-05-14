@@ -1,0 +1,27 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Amukura, Busia County",
+        "description": "Smallholder maize, sorghum, beans — Teso South sub-county, western Kenya",
+        "area_km2": 4.957,
+        "dry_window": "January - February",
+        "wet_window": "May - June"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [34.14, 0.42],
+            [34.16, 0.42],
+            [34.16, 0.44],
+            [34.14, 0.44],
+            [34.14, 0.42]
+          ]
+        ]
+      }
+    }
+  ]
+}

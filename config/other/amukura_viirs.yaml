@@ -1,0 +1,63 @@
+## Amukura, Busia County — VIIRS Nighttime Lights
+## Teso South sub-county, western Kenya (near Uganda border)
+##
+## Purpose: extract monthly nighttime radiance time series 2019-2024.
+## VIIRS monthly composites are already cloud-free by construction —
+## no cloud filtering is needed or applied.
+##
+## Expected values: avg_rad < 0.5 nW/cm2/sr (rural / uninhabited)
+## One output row per month per AOI.
+
+auth:
+  gee_project: ""   # set via EARTHENGINE_PROJECT env var or --gee-project flag
+
+run:
+  name: "amukura_viirs_nightlights"
+  reference_date: "2022-01-01"   # mid-study split; not tied to an event
+
+aoi:
+  mode: "polygon"
+  coordinates:
+    - [34.14, 0.42]   # SW
+    - [34.16, 0.42]   # SE
+    - [34.16, 0.44]   # NE
+    - [34.14, 0.44]   # NW
+    - [34.14, 0.42]   # close ring
+
+date_range:
+  start: "2019-01-01"
+  end:   "2024-12-31"
+
+season:
+  target_months: []    # all months — nightlights trends need the full year
+  flag_only: true
+
+sources:
+  sentinel2:
+    enabled: false
+
+  sentinel1:
+    enabled: false
+
+  viirs:
+    enabled: true
+    collection: "NOAA/VIIRS/DNB/MONTHLY_V1/VCMSLCFG"
+    min_cf_cvg: 1      # require at least 1 cloud-free night per composite pixel
+    indices: [avg_rad] # the radiance band IS the output — no multi-band indices for VIIRS
+    export_geotiff: false
+
+  chirps:
+    enabled: false     # not meaningful alongside monthly nightlights
+
+output:
+  base_dir: "outputs/runs"
+  stats_csv: true
+  flag_report: true
+  skip_existing: true
+  download_method: "local"
+
+stats:
+  percentiles: [25, 50, 75]
+  include_mean:    true
+  include_stddev:  true
+  include_min_max: true

@@ -453,15 +453,43 @@ def run(cfg: dict, skip_confirm: bool = False) -> Path:
                     for r in stats_list
                 }
             else:
-                stats_col  = map_stats_over_collection(
-                    collection=clean_col, signal_names=indices,
-                    aoi=geometry, stats_cfg=stats_cfg,
-                    preprocess_fn=source.apply_cloud_mask,
-                    compute_fn=source.compute_index,
-                    scale=source.default_scale,
-                )
-                stats_list = fetch_stats_batch(stats_col, indices, stats_cfg)
-                stats_by_id = {row["image_id"]: row for row in stats_list}
+                # Batch single-tile stats to avoid GEE "User memory limit exceeded".
+                # A single .getInfo() over 50+ images with multiple indices and
+                # percentiles can exceed GEE's per-request memory quota.
+                # Process in chunks; 20 images per batch is safe for 3 indices +
+                # 5 percentiles. Do not raise without testing on large collections.
+                _GEE_BATCH_SINGLE = 20
+                gee_image_ids_single = [m["image_id"] for m in gee_meta]
+                stats_list_single: list[dict] = []
+                n_batches = (len(gee_image_ids_single) + _GEE_BATCH_SINGLE - 1) // _GEE_BATCH_SINGLE
+                if n_batches > 1:
+                    logger.info(
+                        "%s: single-tile stats — batching %d images into %d chunks of %d",
+                        src_name, len(gee_image_ids_single), n_batches, _GEE_BATCH_SINGLE,
+                    )
+                for _i in range(0, len(gee_image_ids_single), _GEE_BATCH_SINGLE):
+                    _batch_ids = gee_image_ids_single[_i : _i + _GEE_BATCH_SINGLE]
+                    _batch_col = clean_col.filter(
+                        ee.Filter.inList("system:index", _batch_ids)
+                    )
+                    _batch_stats_col = map_stats_over_collection(
+                        collection=_batch_col, signal_names=indices,
+                        aoi=geometry, stats_cfg=stats_cfg,
+                        preprocess_fn=source.apply_cloud_mask,
+                        compute_fn=source.compute_index,
+                        scale=source.default_scale,
+                    )
+                    stats_list_single.extend(
+                        fetch_stats_batch(_batch_stats_col, indices, stats_cfg)
+                    )
+                    logger.debug(
+                        "%s: single-tile batch %d/%d done (%d images)",
+                        src_name,
+                        _i // _GEE_BATCH_SINGLE + 1,
+                        n_batches,
+                        len(_batch_ids),
+                    )
+                stats_by_id = {row["image_id"]: row for row in stats_list_single}
 
         # ── (e-cdse) Copernicus local stats — rasterio windowed reads ─────────
         cdse_stats_by_id: dict[str, dict] = {}

@@ -1,0 +1,80 @@
+## Busia 4km — Full time series
+## AOI matched to WorldView-2 image footprint (Feb + May 2025 purchases)
+## ~2.01 km × 2.06 km (~4.14 km²), Western Kenya, Teso South sub-county
+##
+## Coordinates derived from WV2 image bounds (UTM zone 36N → WGS84).
+## Updated from original 4km busia.json polygon which covered a different
+## patch ~4.5 km to the southwest.
+##
+## Combined run: Sentinel-2 (NDVI, NDWI, NDMI, BSI, EVI) + VIIRS + CHIRPS
+## All months included so both S2 and VIIRS produce full annual time series.
+## Out-of-season images are flagged but kept (flag_only: true).
+
+auth:
+  gee_project: ""   # set via --gee-project or EARTHENGINE_PROJECT env var
+
+run:
+  name: "busia_4km_full"
+  reference_date: "2022-01-01"   # mid-study split for PRE/POST labelling
+
+aoi:
+  mode: "polygon"
+  # Coordinates matched to WV2 image footprint — [lon, lat] GeoJSON order
+  coordinates:
+    - [34.169575, 0.431325]   # SW
+    - [34.187615, 0.431325]   # SE
+    - [34.187615, 0.449809]   # NE
+    - [34.169575, 0.449809]   # NW
+    - [34.169575, 0.431325]   # close ring
+
+date_range:
+  start: "2019-01-01"
+  end:   "2024-12-31"
+
+season:
+  target_months: []    # all months — full annual time series for S2 and VIIRS
+  flag_only: true      # keep all images; flag Jan/Feb (dry) and May/Jun (wet) for reference
+
+sources:
+
+  # ── Sentinel-2 L2A — optical multispectral ────────────────────────────────
+  sentinel2:
+    enabled: true
+    collection: "COPERNICUS/S2_SR_HARMONIZED"
+    max_tile_cloud_pct: 70
+    max_aoi_cloud_pct:  40
+    indices:
+      - NDVI    # vegetation health       (B8-B4)/(B8+B4)
+      - NDWI    # surface water           (B3-B8)/(B3+B8)
+      - NDMI    # vegetation moisture     (B8A-B11)/(B8A+B11)
+      - BSI     # bare soil               ((B11+B4)-(B8+B2))/((B11+B4)+(B8+B2))
+      - EVI     # enhanced vegetation     2.5*(B8-B4)/(B8+6*B4-7.5*B2+1)
+    export_geotiff: false
+
+  # ── VIIRS Nighttime Lights — monthly composites ───────────────────────────
+  viirs:
+    enabled: true
+    collection: "NOAA/VIIRS/DNB/MONTHLY_V1/VCMSLCFG"
+    min_cf_cvg: 1
+    indices: [avg_rad]
+    export_geotiff: false
+
+  # ── CHIRPS Rainfall — ancillary precipitation ─────────────────────────────
+  chirps:
+    enabled: true
+    collection: "UCSB-CHG/CHIRPS/DAILY"
+    accumulation_days: 30
+    export_geotiff: false
+
+output:
+  base_dir: "outputs/runs"
+  stats_csv: true
+  flag_report: true
+  skip_existing: true
+  download_method: "local"
+
+stats:
+  percentiles: [10, 25, 50, 75, 90]
+  include_mean:    true
+  include_stddev:  true
+  include_min_max: true

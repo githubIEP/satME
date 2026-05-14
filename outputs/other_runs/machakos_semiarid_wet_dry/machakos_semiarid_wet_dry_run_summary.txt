@@ -1,0 +1,508 @@
+═════════════════════════════════════════════════════════════════
+  satME Run Summary
+  Run:       machakos_semiarid_wet_dry
+  Generated: 2026-05-12 11:04
+  Pipeline:  satME v0.1.0
+═════════════════════════════════════════════════════════════════
+
+RUN CONFIGURATION
+─────────────────────────────────────────────────────────────────
+  Reference date:  2022-01-01
+                   (images before = PRE, on/after = POST)
+  Date range:      2019-01-01 → 2024-12-31
+  Season filter:   months [1, 2, 5, 10, 11] (Jan, Feb, May, Oct, Nov)
+  Season mode:     exclude out-of-season images
+
+AREA OF INTEREST
+─────────────────────────────────────────────────────────────────
+  Mode:    point + radius
+  Centre:  -1.516°,  37.261°
+  Radius:  1000.0 m
+  Area:    4.0 km²  (2000.0 × 2000.0 m square)
+  WKT:     POLYGON ((37.26998625715545 -1.5249831117499102, 37.26998625715545 -1.5070168882500898, 37.252013742844554 -1.5070168882500898, 37.252013742844554 -1.5249831117499102, 37.26998625715545 -1.5249831117499102))
+
+SENTINEL-2 FILTER PIPELINE
+─────────────────────────────────────────────────────────────────
+  Collection:            COPERNICUS/S2_SR_HARMONIZED
+  Tile cloud ceiling:    50%
+  AOI cloud ceiling:     20%
+  Copernicus fallback:   no
+  Indices computed:      NDVI, BSI, NDMI
+
+  Step                                       In     Out
+  -----------------------------------------------------------------
+  All images in date range                  434
+  After tile cloud filter (≤50%)            434       0 rejected
+  After AOI cloud filter (≤20%)             236     198 rejected
+  After season filter                       122     114 rejected
+  -----------------------------------------------------------------
+  FINAL clean images used                   122
+
+CHIRPS FILTER PIPELINE
+─────────────────────────────────────────────────────────────────
+
+INCLUDED IN STATS  (123)  — passed all filters
+─────────────────────────────────────────────────────────────────
+  Date           Pre/Post    AOI cloud   Tile cloud  Flags
+  -----------------------------------------------------------------
+  2019-01-09     PRE              0.1%         7.4%  PRE_INTERVENTION
+  2019-01-09     PRE              0.1%        25.8%  PRE_INTERVENTION
+  2019-01-14     PRE              0.5%         5.1%  PRE_INTERVENTION
+  2019-01-14     PRE              0.5%        32.7%  PRE_INTERVENTION
+  2019-01-19     PRE              0.2%         3.8%  PRE_INTERVENTION
+  2019-01-19     PRE              0.2%        18.5%  PRE_INTERVENTION
+  2019-01-24     PRE              2.7%         2.8%  PRE_INTERVENTION
+  2019-01-24     PRE              2.7%        27.5%  PRE_INTERVENTION
+  2019-01-29     PRE              0.0%        13.1%  PRE_INTERVENTION
+  2019-01-29     PRE              0.0%        30.1%  PRE_INTERVENTION
+  2019-02-03     PRE              0.0%         0.0%  PRE_INTERVENTION
+  2019-02-03     PRE              0.0%         0.1%  PRE_INTERVENTION
+  2019-02-18     PRE              0.0%         0.6%  PRE_INTERVENTION
+  2019-02-18     PRE              0.0%         2.9%  PRE_INTERVENTION
+  2019-02-28     PRE              0.0%         5.6%  PRE_INTERVENTION
+  2019-02-28     PRE              0.0%         0.0%  PRE_INTERVENTION
+  2019-10-01     PRE             15.4%        23.4%  PRE_INTERVENTION
+  2019-10-01     PRE             15.3%        25.9%  PRE_INTERVENTION
+  2019-10-16     PRE              0.1%         5.4%  PRE_INTERVENTION
+  2019-10-16     PRE              0.0%         7.4%  PRE_INTERVENTION
+  2019-11-05     PRE             15.4%        23.8%  PRE_INTERVENTION
+  2020-01-04     PRE              0.3%        24.3%  PRE_INTERVENTION
+  2020-01-04     PRE              0.7%        28.3%  PRE_INTERVENTION
+  2020-01-14     PRE             15.4%        37.9%  PRE_INTERVENTION
+  2020-01-14     PRE             15.4%        49.5%  PRE_INTERVENTION
+  2020-01-19     PRE              0.1%        28.9%  PRE_INTERVENTION
+  2020-01-19     PRE              0.1%        43.3%  PRE_INTERVENTION
+  2020-02-08     PRE             18.8%        10.7%  PRE_INTERVENTION
+  2020-02-08     PRE             18.9%        28.4%  PRE_INTERVENTION
+  2020-02-13     PRE              9.6%        21.8%  PRE_INTERVENTION
+  2020-05-13     PRE              0.1%         7.8%  PRE_INTERVENTION
+  2020-05-13     PRE              0.1%         8.3%  PRE_INTERVENTION
+  2020-05-18     PRE              1.4%        28.1%  PRE_INTERVENTION
+  2020-05-18     PRE              1.6%        28.2%  PRE_INTERVENTION
+  2020-05-23     PRE              8.7%        25.8%  PRE_INTERVENTION
+  2020-10-05     PRE              0.0%         0.1%  PRE_INTERVENTION
+  2020-10-05     PRE              0.0%        11.9%  PRE_INTERVENTION
+  2020-10-10     PRE             16.0%        24.7%  PRE_INTERVENTION
+  2020-10-10     PRE             16.0%        11.1%  PRE_INTERVENTION
+  2020-10-15     PRE              0.1%        18.6%  PRE_INTERVENTION
+  2020-10-15     PRE              0.1%         8.3%  PRE_INTERVENTION
+  2020-10-25     PRE              0.1%        47.3%  PRE_INTERVENTION
+  2020-11-19     PRE              0.1%        19.4%  PRE_INTERVENTION
+  2020-11-19     PRE              0.1%        16.1%  PRE_INTERVENTION
+  2021-01-03     PRE              5.5%        10.7%  PRE_INTERVENTION
+  2021-01-03     PRE              5.5%         6.9%  PRE_INTERVENTION
+  2021-01-08     PRE              0.2%         1.8%  PRE_INTERVENTION
+  2021-01-08     PRE              0.2%         9.8%  PRE_INTERVENTION
+  2021-01-13     PRE             15.7%        46.6%  PRE_INTERVENTION
+  2021-01-18     PRE              0.3%        17.0%  PRE_INTERVENTION
+  2021-01-28     PRE              0.0%         0.0%  PRE_INTERVENTION
+  2021-01-28     PRE              0.1%        13.5%  PRE_INTERVENTION
+  2021-02-02     PRE              0.0%         9.0%  PRE_INTERVENTION
+  2021-02-02     PRE              0.1%         0.4%  PRE_INTERVENTION
+  2021-02-17     PRE              0.0%        11.3%  PRE_INTERVENTION
+  2021-02-27     PRE              0.0%         0.2%  PRE_INTERVENTION
+  2021-02-27     PRE              0.0%         0.0%  PRE_INTERVENTION
+  2021-10-05     PRE             11.9%        16.1%  PRE_INTERVENTION
+  2021-10-15     PRE              0.0%        25.7%  PRE_INTERVENTION
+  2021-10-15     PRE              0.0%         1.0%  PRE_INTERVENTION
+  2021-10-25     PRE              0.0%         2.1%  PRE_INTERVENTION
+  2021-10-25     PRE              0.0%         9.9%  PRE_INTERVENTION
+  2021-11-09     PRE              0.7%         2.2%  PRE_INTERVENTION | NEAR_INTERVENTION
+  2021-11-09     PRE              0.7%         3.3%  PRE_INTERVENTION | NEAR_INTERVENTION
+  2021-11-19     PRE             18.9%        19.4%  PRE_INTERVENTION | NEAR_INTERVENTION
+  2021-11-19     PRE             18.9%        17.7%  PRE_INTERVENTION | NEAR_INTERVENTION
+  2021-11-24     PRE              0.0%         5.2%  PRE_INTERVENTION | NEAR_INTERVENTION
+  2021-11-24     PRE              0.0%         7.7%  PRE_INTERVENTION | NEAR_INTERVENTION
+  2022-01-03     POST             0.0%         0.2%  POST_INTERVENTION | NEAR_INTERVENTION
+  2022-01-03     POST             0.1%         4.0%  POST_INTERVENTION | NEAR_INTERVENTION
+  2022-01-08     POST             9.0%        24.7%  POST_INTERVENTION | NEAR_INTERVENTION
+  2022-01-08     POST             9.0%        47.2%  POST_INTERVENTION | NEAR_INTERVENTION
+  2022-01-13     POST             0.0%         0.0%  POST_INTERVENTION | NEAR_INTERVENTION
+  2022-01-13     POST             0.1%         1.0%  POST_INTERVENTION | NEAR_INTERVENTION
+  2022-01-23     POST             0.0%        37.1%  POST_INTERVENTION | NEAR_INTERVENTION
+  2022-01-23     POST             0.0%        28.8%  POST_INTERVENTION | NEAR_INTERVENTION
+  2022-01-28     POST             0.0%         0.6%  POST_INTERVENTION | NEAR_INTERVENTION
+  2022-01-28     POST             0.0%         0.8%  POST_INTERVENTION | NEAR_INTERVENTION
+  2022-02-12     POST             0.0%         6.0%  POST_INTERVENTION | NEAR_INTERVENTION
+  2022-02-12     POST             0.0%        21.0%  POST_INTERVENTION | NEAR_INTERVENTION
+  2022-02-27     POST             0.0%         0.0%  POST_INTERVENTION | NEAR_INTERVENTION
+  2022-02-27     POST             0.0%         0.6%  POST_INTERVENTION | NEAR_INTERVENTION
+  2022-05-08     POST             0.0%        41.7%  POST_INTERVENTION
+  2022-05-08     POST             0.0%        18.2%  POST_INTERVENTION
+  2022-05-13     POST             0.0%         2.2%  POST_INTERVENTION
+  2022-05-13     POST             0.0%        48.7%  POST_INTERVENTION
+  2022-05-23     POST             0.0%        16.4%  POST_INTERVENTION
+  2022-05-23     POST             0.0%         5.6%  POST_INTERVENTION
+  2022-10-25     POST            12.4%        22.0%  POST_INTERVENTION
+  2022-10-25     POST            11.4%         8.2%  POST_INTERVENTION
+  2023-01-13     POST             1.8%        32.2%  POST_INTERVENTION
+  2023-01-13     POST             1.6%         0.6%  POST_INTERVENTION
+  2023-01-18     POST             0.0%         0.0%  POST_INTERVENTION
+  2023-01-18     POST             0.0%         0.0%  POST_INTERVENTION
+  2023-01-28     POST             0.0%         0.0%  POST_INTERVENTION
+  2023-01-28     POST             0.0%        25.9%  POST_INTERVENTION
+  2023-02-07     POST             0.0%         0.9%  POST_INTERVENTION
+  2023-02-07     POST             0.0%         2.1%  POST_INTERVENTION
+  2023-02-12     POST             0.0%         2.4%  POST_INTERVENTION
+  2023-02-12     POST             0.0%        20.9%  POST_INTERVENTION
+  2023-02-17     POST             0.0%         0.9%  POST_INTERVENTION
+  2023-02-17     POST             0.0%        37.9%  POST_INTERVENTION
+  2023-02-22     POST             0.0%         0.3%  POST_INTERVENTION
+  2023-02-22     POST             0.0%         8.6%  POST_INTERVENTION
+  2023-05-23     POST            18.2%        50.0%  POST_INTERVENTION
+  2023-10-10     POST             4.4%         3.1%  POST_INTERVENTION
+  2023-10-10     POST             4.0%        13.0%  POST_INTERVENTION
+  2023-11-29     POST             4.4%         6.1%  POST_INTERVENTION
+  2023-11-29     POST             0.3%         6.1%  POST_INTERVENTION
+  2024-01-23     POST            18.3%        16.7%  POST_INTERVENTION
+  2024-01-23     POST            23.9%        11.3%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-05-27     POST            16.7%        14.6%  POST_INTERVENTION
+  2024-05-27     POST            18.5%        15.8%  POST_INTERVENTION
+  2024-10-09     POST             0.0%        16.7%  POST_INTERVENTION
+  2024-10-09     POST             0.0%         5.0%  POST_INTERVENTION
+  2024-10-14     POST             0.0%         0.8%  POST_INTERVENTION
+  2024-10-14     POST             0.0%         8.9%  POST_INTERVENTION
+  2024-10-24     POST            17.6%        22.1%  POST_INTERVENTION
+  2024-10-24     POST            19.2%        19.4%  POST_INTERVENTION
+  2024-10-29     POST             0.0%         9.0%  POST_INTERVENTION
+  2024-10-29     POST             0.0%        18.1%  POST_INTERVENTION
+  2024-11-03     POST             7.5%        30.6%  POST_INTERVENTION
+  2024-11-03     POST             6.8%         9.3%  POST_INTERVENTION
+
+EXCLUDED IMAGES  (311)  — did not reach stats output
+─────────────────────────────────────────────────────────────────
+  Note: 'in_clean_set' = passed cloud filters only.
+        Season filter is applied after; out-of-season images
+        can be cloud-clean yet still excluded from stats.
+
+  By reason:
+    Tile cloud > 50% (or AOI cloud > 20%):  197
+    Cloud-clean but out of season:                  114
+    Other:                                          0
+
+  Cloud-rejected  (197)
+  -----------------------------------------------------------------
+  Date           Pre/Post    AOI cloud   Tile cloud  Flags
+  2019-02-08     PRE             53.5%        24.1%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-02-13     PRE             73.9%        24.8%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-02-13     PRE             73.9%        43.1%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-02-23     PRE             55.7%        37.9%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-03-05     PRE             57.0%        25.2%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-03-05     PRE             57.0%        38.1%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-03-15     PRE             32.6%         4.6%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-03-15     PRE             32.6%        15.3%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-04-09     PRE             73.6%        21.1%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-04-09     PRE             73.6%        26.6%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-04-14     PRE             57.3%        28.2%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-04-14     PRE             57.3%        47.5%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-05-09     PRE             79.1%        32.0%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-05-09     PRE             78.7%        41.7%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-06-08     PRE             99.1%        41.1%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-06-18     PRE            100.0%        44.1%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-07-18     PRE             34.1%        13.8%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-07-28     PRE             92.9%        46.4%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-08-17     PRE            100.0%        24.4%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-08-22     PRE             91.5%        39.5%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-09-06     PRE             45.3%        34.6%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-09-06     PRE             45.3%        44.9%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-10-21     PRE             36.3%        33.7%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-10-21     PRE             36.2%        34.4%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-11-15     PRE             76.3%        22.9%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-11-15     PRE             76.3%        33.1%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-11-20     PRE             99.1%        38.9%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-11-20     PRE             99.1%        43.0%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-12-15     PRE             77.8%        40.1%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-12-30     PRE            100.0%        37.0%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-01-09     PRE             72.8%        45.7%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-02-03     PRE             24.2%        23.1%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-02-03     PRE             24.2%        27.7%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-02-18     PRE             64.9%        34.9%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-02-28     PRE             21.9%        22.1%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-02-28     PRE             22.6%        35.4%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-03-24     PRE             53.7%        46.1%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-03-24     PRE             53.7%        33.7%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-04-03     PRE             36.4%        29.7%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-04-03     PRE             36.4%        41.8%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-04-13     PRE             32.4%        47.1%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-05-28     PRE             66.8%        18.7%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-05-28     PRE             67.1%        11.7%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-06-07     PRE             26.9%        41.3%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-06-07     PRE             26.9%        25.0%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-06-22     PRE             31.6%        17.6%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-06-27     PRE             94.9%        34.4%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-06-27     PRE             95.4%        19.0%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-07-22     PRE            100.0%        47.8%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-08-01     PRE             91.8%        30.9%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-08-26     PRE             87.2%        19.1%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-09-10     PRE             97.8%        28.6%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-09-15     PRE             48.2%        25.8%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-11-24     PRE             25.1%        34.1%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-11-24     PRE             23.2%        37.1%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-12-04     PRE             28.1%        46.8%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-12-04     PRE             28.1%        37.1%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-12-09     PRE            100.0%        47.1%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-12-09     PRE            100.0%        46.6%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-12-24     PRE             98.1%        43.4%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2021-02-07     PRE             26.4%        37.9%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2021-04-03     PRE             42.5%        25.8%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2021-04-08     PRE             86.9%        45.9%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2021-04-28     PRE             35.7%        41.9%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2021-05-03     PRE             31.8%        40.8%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2021-05-08     PRE             25.8%        46.4%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2021-05-28     PRE             93.4%        48.3%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2021-06-07     PRE             57.7%        43.3%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2021-07-07     PRE             89.6%        24.6%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2021-07-27     PRE            100.0%        48.4%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2021-07-27     PRE            100.0%        29.5%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2021-09-05     PRE            100.0%        38.8%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2021-09-30     PRE             99.1%        32.2%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2021-10-10     PRE            100.0%        43.0%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2021-10-30     PRE             67.6%        36.2%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2021-11-04     PRE             69.5%        26.2%  HIGH_AOI_CLOUD | PRE_INTERVENTION | NEAR_INTERVENTION
+  2021-11-04     PRE             69.2%        23.6%  HIGH_AOI_CLOUD | PRE_INTERVENTION | NEAR_INTERVENTION
+  2021-11-14     PRE             94.7%        36.1%  HIGH_AOI_CLOUD | PRE_INTERVENTION | NEAR_INTERVENTION
+  2021-11-29     PRE             90.7%        45.1%  HIGH_AOI_CLOUD | PRE_INTERVENTION | NEAR_INTERVENTION
+  2021-12-09     PRE             77.1%        29.3%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION | NEAR_INTERVENTION
+  2021-12-09     PRE             78.4%        33.5%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION | NEAR_INTERVENTION
+  2021-12-19     PRE             29.2%        35.7%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION | NEAR_INTERVENTION
+  2021-12-29     PRE             25.0%        30.3%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION | NEAR_INTERVENTION
+  2021-12-29     PRE             24.9%        20.9%  OUT_OF_SEASON | HIGH_AOI_CLOUD | PRE_INTERVENTION | NEAR_INTERVENTION
+  2022-02-17     POST            24.2%        15.1%  HIGH_AOI_CLOUD | POST_INTERVENTION | NEAR_INTERVENTION
+  2022-02-17     POST            23.9%        12.0%  HIGH_AOI_CLOUD | POST_INTERVENTION | NEAR_INTERVENTION
+  2022-03-04     POST            70.9%         1.5%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-03-04     POST            71.1%        19.5%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-03-24     POST            38.9%        38.4%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-04-03     POST            98.8%        43.5%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-04-08     POST            91.3%        32.8%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-04-08     POST            91.6%        44.5%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-04-13     POST            40.3%        38.7%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-04-13     POST            42.1%        31.9%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-06-07     POST            92.6%        47.8%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-07-02     POST            41.9%        15.9%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-07-02     POST            38.8%        16.7%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-08-06     POST           100.0%        45.9%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-09-10     POST            30.4%        11.5%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-09-20     POST            65.8%        46.9%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-10-10     POST            71.5%        25.3%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-10-10     POST            70.0%        36.0%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-10-15     POST            36.5%         7.1%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-10-15     POST            38.6%         6.0%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-10-20     POST            60.9%        48.8%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-10-30     POST            45.3%        40.8%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-11-19     POST            83.3%        46.8%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-12-09     POST            67.2%        35.3%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-12-09     POST            69.1%        36.2%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-12-19     POST            28.5%        19.0%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-12-19     POST            24.8%         8.1%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-12-24     POST            43.8%        37.8%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-12-29     POST            99.6%        37.1%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-01-08     POST            57.4%         3.9%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-02-02     POST            51.8%        26.2%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-02-02     POST            55.9%        22.5%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-02-27     POST            99.9%        31.7%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-03-04     POST            60.3%        18.8%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-03-04     POST            61.0%        24.8%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-04-03     POST            28.0%        47.8%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-04-23     POST            38.7%        46.6%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-05-13     POST            20.2%        46.2%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-05-13     POST            23.8%        47.2%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-05-18     POST            99.9%        48.5%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-05-28     POST            54.8%        42.5%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-05-28     POST            53.8%        47.0%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-06-02     POST            70.3%        10.4%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-06-12     POST            48.2%        33.6%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-07-22     POST           100.0%        47.7%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-07-27     POST            99.2%        18.2%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-09-05     POST            44.2%        19.2%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-09-05     POST            43.5%        18.4%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-09-10     POST            24.7%        15.1%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-09-10     POST            25.4%        32.0%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-09-20     POST            63.5%        36.4%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-09-20     POST            65.4%        19.4%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-10-15     POST            96.8%        33.0%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-10-15     POST            98.0%        49.0%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-10-20     POST            78.8%        36.6%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-10-20     POST            79.9%        34.9%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-10-25     POST            38.6%        35.9%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-11-09     POST            86.3%        49.8%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-12-09     POST            99.3%        26.7%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-12-24     POST            73.4%        15.0%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-12-24     POST            66.8%        31.8%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-12-29     POST            64.3%        26.9%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-12-29     POST            61.3%        41.6%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-01-03     POST            97.6%        28.7%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-01-28     POST            45.0%        21.8%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-01-28     POST            44.2%        42.4%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-02-02     POST            43.5%        46.7%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-02-02     POST            43.8%        28.1%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-02-07     POST            64.7%        26.9%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-02-07     POST            67.6%        47.9%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-02-12     POST            30.1%        17.2%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-02-12     POST            31.2%        44.3%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-02-17     POST            41.9%         7.1%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-02-17     POST            43.1%        43.7%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-02-22     POST            31.0%        41.3%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-02-22     POST            52.3%        24.1%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-02-27     POST            93.8%        46.3%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-02-27     POST            93.8%        14.8%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-03-18     POST            25.7%        26.2%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-03-18     POST            26.0%        35.5%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-03-23     POST            98.0%        33.1%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-03-23     POST            98.0%        34.6%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-04-07     POST            38.6%         9.4%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-04-07     POST            39.2%        33.0%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-04-12     POST            22.7%        47.4%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-04-17     POST            52.1%        48.9%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-04-17     POST            52.1%        41.9%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-04-27     POST            71.1%        50.0%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-05-12     POST            83.2%        26.7%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-05-22     POST            64.9%        43.7%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-06-01     POST            59.7%        18.1%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-06-01     POST            60.4%        16.1%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-06-11     POST            51.1%        34.3%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-06-11     POST            55.6%        21.2%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-06-26     POST            55.4%         2.8%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-06-26     POST            55.6%        29.0%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-08-30     POST            59.5%        39.9%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-09-24     POST            29.1%        37.1%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-09-24     POST            26.0%        44.8%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-10-04     POST            47.6%        26.1%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-10-04     POST            48.5%        14.5%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-11-18     POST            25.6%        30.5%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-11-18     POST            24.5%        36.7%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-11-23     POST            75.3%        35.8%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-11-23     POST            74.7%        42.2%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-11-28     POST            96.9%        34.1%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-11-28     POST            97.3%        30.8%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-12-18     POST            89.6%        30.0%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-12-18     POST            89.3%        44.6%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-12-23     POST            74.0%        45.3%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-12-23     POST            73.0%        46.8%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-12-28     POST            81.8%         7.9%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-12-28     POST            81.2%        32.2%  OUT_OF_SEASON | HIGH_AOI_CLOUD | POST_INTERVENTION
+  Out-of-season, cloud-clean  (114)
+  -----------------------------------------------------------------
+  Date           Pre/Post    AOI cloud   Tile cloud  Flags
+  2019-03-10     PRE              2.2%         1.2%  OUT_OF_SEASON | PRE_INTERVENTION
+  2019-03-10     PRE              2.2%         4.3%  OUT_OF_SEASON | PRE_INTERVENTION
+  2019-03-20     PRE              5.2%         4.5%  OUT_OF_SEASON | PRE_INTERVENTION
+  2019-03-25     PRE              2.2%        35.7%  OUT_OF_SEASON | PRE_INTERVENTION
+  2019-03-25     PRE              2.2%        46.2%  OUT_OF_SEASON | PRE_INTERVENTION
+  2019-03-30     PRE             13.4%        12.0%  OUT_OF_SEASON | PRE_INTERVENTION
+  2019-03-30     PRE             13.5%        12.8%  OUT_OF_SEASON | PRE_INTERVENTION
+  2019-04-19     PRE              6.4%        27.3%  OUT_OF_SEASON | PRE_INTERVENTION
+  2019-04-19     PRE              6.4%        27.4%  OUT_OF_SEASON | PRE_INTERVENTION
+  2019-04-29     PRE              0.1%        29.0%  OUT_OF_SEASON | PRE_INTERVENTION
+  2019-04-29     PRE              0.0%        29.2%  OUT_OF_SEASON | PRE_INTERVENTION
+  2019-06-13     PRE              2.1%        42.8%  OUT_OF_SEASON | PRE_INTERVENTION
+  2019-06-13     PRE              2.1%        46.6%  OUT_OF_SEASON | PRE_INTERVENTION
+  2019-06-23     PRE              0.8%        38.5%  OUT_OF_SEASON | PRE_INTERVENTION
+  2019-06-23     PRE              0.8%         8.6%  OUT_OF_SEASON | PRE_INTERVENTION
+  2019-07-23     PRE              0.0%         5.6%  OUT_OF_SEASON | PRE_INTERVENTION
+  2019-07-23     PRE              0.0%        31.3%  OUT_OF_SEASON | PRE_INTERVENTION
+  2019-08-27     PRE             19.1%        38.5%  OUT_OF_SEASON | PRE_INTERVENTION
+  2019-08-27     PRE             19.1%        31.3%  OUT_OF_SEASON | PRE_INTERVENTION
+  2019-09-16     PRE              0.0%         8.1%  OUT_OF_SEASON | PRE_INTERVENTION
+  2019-09-16     PRE              0.0%        10.5%  OUT_OF_SEASON | PRE_INTERVENTION
+  2019-09-21     PRE              6.6%        25.2%  OUT_OF_SEASON | PRE_INTERVENTION
+  2019-09-21     PRE              6.6%        15.3%  OUT_OF_SEASON | PRE_INTERVENTION
+  2019-12-20     PRE              0.0%         2.6%  OUT_OF_SEASON | PRE_INTERVENTION
+  2019-12-20     PRE              0.1%        13.6%  OUT_OF_SEASON | PRE_INTERVENTION
+  2019-12-25     PRE             16.7%        38.0%  OUT_OF_SEASON | PRE_INTERVENTION
+  2020-03-14     PRE             17.4%        37.2%  OUT_OF_SEASON | PRE_INTERVENTION
+  2020-03-14     PRE             17.4%        44.6%  OUT_OF_SEASON | PRE_INTERVENTION
+  2020-04-08     PRE              9.6%        11.9%  OUT_OF_SEASON | PRE_INTERVENTION
+  2020-04-08     PRE              9.7%        27.2%  OUT_OF_SEASON | PRE_INTERVENTION
+  2020-06-02     PRE              6.2%        10.7%  OUT_OF_SEASON | PRE_INTERVENTION
+  2020-06-02     PRE              6.1%         3.5%  OUT_OF_SEASON | PRE_INTERVENTION
+  2020-07-12     PRE              6.7%         7.5%  OUT_OF_SEASON | PRE_INTERVENTION
+  2020-07-12     PRE              6.7%        13.0%  OUT_OF_SEASON | PRE_INTERVENTION
+  2020-08-06     PRE              4.9%        15.8%  OUT_OF_SEASON | PRE_INTERVENTION
+  2020-08-06     PRE              4.9%         8.6%  OUT_OF_SEASON | PRE_INTERVENTION
+  2020-08-11     PRE              0.1%         1.5%  OUT_OF_SEASON | PRE_INTERVENTION
+  2020-08-11     PRE              0.1%         9.1%  OUT_OF_SEASON | PRE_INTERVENTION
+  2020-08-31     PRE              0.0%         0.2%  OUT_OF_SEASON | PRE_INTERVENTION
+  2020-08-31     PRE              0.0%         0.1%  OUT_OF_SEASON | PRE_INTERVENTION
+  2020-12-14     PRE              0.4%         5.1%  OUT_OF_SEASON | PRE_INTERVENTION
+  2020-12-14     PRE              0.4%         2.5%  OUT_OF_SEASON | PRE_INTERVENTION
+  2020-12-19     PRE              9.1%        32.1%  OUT_OF_SEASON | PRE_INTERVENTION
+  2020-12-19     PRE              9.1%        37.7%  OUT_OF_SEASON | PRE_INTERVENTION
+  2021-03-04     PRE             18.3%        35.6%  OUT_OF_SEASON | PRE_INTERVENTION
+  2021-03-09     PRE             18.6%        18.9%  OUT_OF_SEASON | PRE_INTERVENTION
+  2021-03-09     PRE             18.6%        34.2%  OUT_OF_SEASON | PRE_INTERVENTION
+  2021-03-14     PRE              0.1%        17.2%  OUT_OF_SEASON | PRE_INTERVENTION
+  2021-03-14     PRE              0.1%        27.1%  OUT_OF_SEASON | PRE_INTERVENTION
+  2021-03-19     PRE             17.9%        21.9%  OUT_OF_SEASON | PRE_INTERVENTION
+  2021-03-19     PRE             17.9%        29.2%  OUT_OF_SEASON | PRE_INTERVENTION
+  2021-03-24     PRE             17.3%        34.2%  OUT_OF_SEASON | PRE_INTERVENTION
+  2021-03-24     PRE             17.3%        26.0%  OUT_OF_SEASON | PRE_INTERVENTION
+  2021-03-29     PRE              3.5%        10.2%  OUT_OF_SEASON | PRE_INTERVENTION
+  2021-03-29     PRE              2.6%         7.3%  OUT_OF_SEASON | PRE_INTERVENTION
+  2021-04-13     PRE              7.7%        42.1%  OUT_OF_SEASON | PRE_INTERVENTION
+  2021-04-13     PRE              7.7%        45.8%  OUT_OF_SEASON | PRE_INTERVENTION
+  2021-06-02     PRE              0.1%        15.7%  OUT_OF_SEASON | PRE_INTERVENTION
+  2021-06-02     PRE              0.1%         6.7%  OUT_OF_SEASON | PRE_INTERVENTION
+  2021-07-22     PRE              8.1%        13.3%  OUT_OF_SEASON | PRE_INTERVENTION
+  2021-07-22     PRE              8.1%        25.8%  OUT_OF_SEASON | PRE_INTERVENTION
+  2021-08-21     PRE              0.9%         8.0%  OUT_OF_SEASON | PRE_INTERVENTION
+  2021-08-21     PRE              0.9%        46.1%  OUT_OF_SEASON | PRE_INTERVENTION
+  2021-08-26     PRE              0.1%        10.5%  OUT_OF_SEASON | PRE_INTERVENTION
+  2021-09-15     PRE              0.0%        17.1%  OUT_OF_SEASON | PRE_INTERVENTION
+  2021-09-20     PRE              3.6%        12.3%  OUT_OF_SEASON | PRE_INTERVENTION
+  2021-09-25     PRE              0.0%        25.2%  OUT_OF_SEASON | PRE_INTERVENTION
+  2021-12-19     PRE             10.4%        34.5%  OUT_OF_SEASON | PRE_INTERVENTION | NEAR_INTERVENTION
+  2021-12-24     PRE              0.1%        21.1%  OUT_OF_SEASON | PRE_INTERVENTION | NEAR_INTERVENTION
+  2021-12-24     PRE              0.0%        37.4%  OUT_OF_SEASON | PRE_INTERVENTION | NEAR_INTERVENTION
+  2022-03-09     POST            13.8%        32.1%  OUT_OF_SEASON | POST_INTERVENTION
+  2022-03-09     POST            14.1%        16.5%  OUT_OF_SEASON | POST_INTERVENTION
+  2022-03-14     POST             0.0%         6.3%  OUT_OF_SEASON | POST_INTERVENTION
+  2022-03-14     POST             0.0%        10.4%  OUT_OF_SEASON | POST_INTERVENTION
+  2022-03-19     POST            19.0%        10.9%  OUT_OF_SEASON | POST_INTERVENTION
+  2022-03-19     POST            15.0%         6.4%  OUT_OF_SEASON | POST_INTERVENTION
+  2022-06-17     POST             4.3%        44.5%  OUT_OF_SEASON | POST_INTERVENTION
+  2022-08-21     POST             0.0%         9.3%  OUT_OF_SEASON | POST_INTERVENTION
+  2022-08-21     POST             0.0%        25.4%  OUT_OF_SEASON | POST_INTERVENTION
+  2022-09-05     POST             0.0%        36.3%  OUT_OF_SEASON | POST_INTERVENTION
+  2022-09-05     POST             0.1%        38.9%  OUT_OF_SEASON | POST_INTERVENTION
+  2022-09-25     POST             4.4%        37.0%  OUT_OF_SEASON | POST_INTERVENTION
+  2023-03-09     POST             0.0%         0.5%  OUT_OF_SEASON | POST_INTERVENTION
+  2023-03-09     POST             0.0%         0.3%  OUT_OF_SEASON | POST_INTERVENTION
+  2023-06-07     POST             0.0%         7.1%  OUT_OF_SEASON | POST_INTERVENTION
+  2023-06-07     POST             0.0%        22.4%  OUT_OF_SEASON | POST_INTERVENTION
+  2023-08-21     POST             0.0%        18.0%  OUT_OF_SEASON | POST_INTERVENTION
+  2023-08-26     POST             0.0%         1.3%  OUT_OF_SEASON | POST_INTERVENTION
+  2023-08-26     POST             0.0%         1.2%  OUT_OF_SEASON | POST_INTERVENTION
+  2023-09-25     POST             0.0%         6.8%  OUT_OF_SEASON | POST_INTERVENTION
+  2023-09-25     POST             0.0%         4.3%  OUT_OF_SEASON | POST_INTERVENTION
+  2024-03-03     POST             0.0%         3.8%  OUT_OF_SEASON | POST_INTERVENTION
+  2024-03-03     POST             0.0%        22.5%  OUT_OF_SEASON | POST_INTERVENTION
+  2024-03-08     POST             4.8%        11.2%  OUT_OF_SEASON | POST_INTERVENTION
+  2024-03-08     POST             4.9%         9.8%  OUT_OF_SEASON | POST_INTERVENTION
+  2024-03-13     POST             0.8%        11.9%  OUT_OF_SEASON | POST_INTERVENTION
+  2024-03-13     POST             0.8%        31.3%  OUT_OF_SEASON | POST_INTERVENTION
+  2024-04-22     POST             0.0%        17.2%  OUT_OF_SEASON | POST_INTERVENTION
+  2024-04-22     POST             0.0%        21.9%  OUT_OF_SEASON | POST_INTERVENTION
+  2024-06-16     POST            10.0%         6.7%  OUT_OF_SEASON | POST_INTERVENTION
+  2024-06-16     POST             9.8%         1.2%  OUT_OF_SEASON | POST_INTERVENTION
+  2024-07-01     POST             0.6%        36.0%  OUT_OF_SEASON | POST_INTERVENTION
+  2024-08-05     POST             0.0%         0.5%  OUT_OF_SEASON | POST_INTERVENTION
+  2024-09-09     POST             0.0%         5.6%  OUT_OF_SEASON | POST_INTERVENTION
+  2024-09-09     POST             0.0%        23.3%  OUT_OF_SEASON | POST_INTERVENTION
+  2024-09-14     POST             0.0%         0.2%  OUT_OF_SEASON | POST_INTERVENTION
+  2024-09-14     POST             0.0%         7.9%  OUT_OF_SEASON | POST_INTERVENTION
+  2024-09-19     POST             0.0%         4.0%  OUT_OF_SEASON | POST_INTERVENTION
+  2024-09-29     POST             0.0%        28.5%  OUT_OF_SEASON | POST_INTERVENTION
+  2024-09-29     POST             0.0%        11.8%  OUT_OF_SEASON | POST_INTERVENTION
+  2024-12-08     POST             7.0%         6.7%  OUT_OF_SEASON | POST_INTERVENTION
+  2024-12-08     POST             4.6%        11.4%  OUT_OF_SEASON | POST_INTERVENTION
+  2024-12-13     POST             0.0%         7.9%  OUT_OF_SEASON | POST_INTERVENTION
+  2024-12-13     POST             0.0%         4.9%  OUT_OF_SEASON | POST_INTERVENTION
+
+STATISTICS COMPUTED
+─────────────────────────────────────────────────────────────────
+  Percentiles:  [10, 25, 50, 75, 90]
+  Mean:         yes
+  Std dev:      yes
+  Min/max:      yes
+
+═════════════════════════════════════════════════════════════════

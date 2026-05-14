@@ -60,7 +60,7 @@ season:
 # ──────────────────────────────────────────────────────────────────────────────
 # SOURCES
 # ──────────────────────────────────────────────────────────────────────────────
-# Enable any combination of the sources below.
+# Enable any combination of the sources below. 
 # Each produces rows in stats.csv distinguished by the `source` column.
 # See REFERENCE.md for full band/index catalogs and interpretation guidance.
 # ──────────────────────────────────────────────────────────────────────────────

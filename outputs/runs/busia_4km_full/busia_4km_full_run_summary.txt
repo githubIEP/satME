@@ -1,0 +1,417 @@
+═════════════════════════════════════════════════════════════════
+  satME Run Summary
+  Run:       busia_4km_full
+  Generated: 2026-05-14 15:18
+  Pipeline:  satME v0.1.0
+═════════════════════════════════════════════════════════════════
+
+RUN CONFIGURATION
+─────────────────────────────────────────────────────────────────
+  Reference date:  2022-01-01
+                   (images before = PRE, on/after = POST)
+  Date range:      2019-01-01 → 2024-12-31
+  Season filter:   months [] ()
+  Season mode:     flag only (all images kept)
+
+AREA OF INTEREST
+─────────────────────────────────────────────────────────────────
+  Mode:    polygon
+  Area:    4.132055 km²
+  WKT:     POLYGON ((34.169575 0.431325, 34.187615 0.431325, 34.187615 0.449809, 34.169575 0.449809, 34.169575 0.431325))
+
+SENTINEL-2 FILTER PIPELINE
+─────────────────────────────────────────────────────────────────
+  Collection:            COPERNICUS/S2_SR_HARMONIZED
+  Tile cloud ceiling:    70%
+  AOI cloud ceiling:     40%
+  Copernicus fallback:   no
+  Indices computed:      NDVI, NDWI, NDMI, BSI, EVI
+
+  Step                                       In     Out
+  -----------------------------------------------------------------
+  All images in date range                  345
+  After tile cloud filter (≤70%)            345       0 rejected
+  After AOI cloud filter (≤40%)             264      81 rejected
+  After season filter                       264       0 rejected
+  -----------------------------------------------------------------
+  FINAL clean images used                   264
+
+VIIRS FILTER PIPELINE
+─────────────────────────────────────────────────────────────────
+
+CHIRPS FILTER PIPELINE
+─────────────────────────────────────────────────────────────────
+
+INCLUDED IN STATS  (265)  — passed all filters
+─────────────────────────────────────────────────────────────────
+  Date           Pre/Post    AOI cloud   Tile cloud  Flags
+  -----------------------------------------------------------------
+  2019-01-02     PRE              0.0%         0.7%  PRE_INTERVENTION
+  2019-01-07     PRE              0.0%         1.5%  PRE_INTERVENTION
+  2019-01-12     PRE              0.0%        10.3%  PRE_INTERVENTION
+  2019-01-17     PRE              0.0%         4.0%  PRE_INTERVENTION
+  2019-01-22     PRE              0.0%         0.2%  PRE_INTERVENTION
+  2019-01-27     PRE             12.3%        25.3%  PRE_INTERVENTION
+  2019-02-01     PRE              0.0%         0.0%  PRE_INTERVENTION
+  2019-02-06     PRE              0.0%        39.9%  PRE_INTERVENTION
+  2019-02-21     PRE             30.2%        39.9%  PRE_INTERVENTION
+  2019-02-26     PRE              0.0%         1.4%  PRE_INTERVENTION
+  2019-03-03     PRE              2.9%         9.2%  PRE_INTERVENTION
+  2019-03-08     PRE              8.1%        22.9%  PRE_INTERVENTION
+  2019-03-13     PRE              0.0%         0.2%  PRE_INTERVENTION
+  2019-03-18     PRE              0.0%         4.2%  PRE_INTERVENTION
+  2019-03-23     PRE              0.0%         0.0%  PRE_INTERVENTION
+  2019-03-28     PRE              0.0%        15.2%  PRE_INTERVENTION
+  2019-04-12     PRE              0.0%         5.6%  PRE_INTERVENTION
+  2019-05-02     PRE              0.8%        34.6%  PRE_INTERVENTION
+  2019-05-07     PRE              0.0%        10.9%  PRE_INTERVENTION
+  2019-05-17     PRE              0.0%        14.7%  PRE_INTERVENTION
+  2019-05-22     PRE              6.5%        13.8%  PRE_INTERVENTION
+  2019-05-27     PRE              0.0%        20.8%  PRE_INTERVENTION
+  2019-06-01     PRE             13.8%        53.1%  PRE_INTERVENTION
+  2019-06-06     PRE             36.2%        13.6%  PRE_INTERVENTION
+  2019-06-16     PRE              0.0%        21.8%  PRE_INTERVENTION
+  2019-07-01     PRE              0.0%         1.5%  PRE_INTERVENTION
+  2019-07-06     PRE              0.0%         5.3%  PRE_INTERVENTION
+  2019-07-11     PRE              1.9%        12.0%  PRE_INTERVENTION
+  2019-07-16     PRE              0.0%        20.1%  PRE_INTERVENTION
+  2019-07-21     PRE              0.0%        15.0%  PRE_INTERVENTION
+  2019-07-26     PRE              0.0%        14.5%  PRE_INTERVENTION
+  2019-08-05     PRE             32.7%        11.8%  PRE_INTERVENTION
+  2019-08-15     PRE              0.0%        10.0%  PRE_INTERVENTION
+  2019-08-20     PRE              0.0%        23.2%  PRE_INTERVENTION
+  2019-08-25     PRE              0.0%         2.1%  PRE_INTERVENTION
+  2019-08-30     PRE              0.0%        19.1%  PRE_INTERVENTION
+  2019-09-04     PRE              2.1%        55.3%  PRE_INTERVENTION
+  2019-09-09     PRE              0.0%        11.3%  PRE_INTERVENTION
+  2019-09-19     PRE              0.0%         0.8%  PRE_INTERVENTION
+  2019-09-24     PRE              0.0%         5.8%  PRE_INTERVENTION
+  2019-09-29     PRE              0.0%        16.4%  PRE_INTERVENTION
+  2019-10-04     PRE              0.2%         5.1%  PRE_INTERVENTION
+  2019-11-03     PRE              0.0%         9.4%  PRE_INTERVENTION
+  2019-11-28     PRE             26.9%        27.9%  PRE_INTERVENTION
+  2019-12-13     PRE              5.8%        43.7%  PRE_INTERVENTION
+  2019-12-18     PRE             23.7%        46.8%  PRE_INTERVENTION
+  2019-12-28     PRE              1.5%        67.4%  PRE_INTERVENTION
+  2020-01-02     PRE              0.0%        28.5%  PRE_INTERVENTION
+  2020-01-07     PRE              2.9%        17.0%  PRE_INTERVENTION
+  2020-01-12     PRE             30.9%        59.6%  PRE_INTERVENTION
+  2020-01-22     PRE              0.0%         4.1%  PRE_INTERVENTION
+  2020-02-11     PRE              0.0%         0.1%  PRE_INTERVENTION
+  2020-02-16     PRE              0.0%         1.3%  PRE_INTERVENTION
+  2020-02-21     PRE              0.0%        13.2%  PRE_INTERVENTION
+  2020-03-07     PRE              0.0%        34.5%  PRE_INTERVENTION
+  2020-03-22     PRE              2.1%        38.1%  PRE_INTERVENTION
+  2020-03-27     PRE              0.0%        16.0%  PRE_INTERVENTION
+  2020-04-01     PRE              0.0%         7.0%  PRE_INTERVENTION
+  2020-04-11     PRE              3.0%        22.7%  PRE_INTERVENTION
+  2020-05-01     PRE              0.0%         9.7%  PRE_INTERVENTION
+  2020-05-06     PRE             10.5%         7.6%  PRE_INTERVENTION
+  2020-05-16     PRE              0.0%        17.8%  PRE_INTERVENTION
+  2020-05-21     PRE              3.0%         3.0%  PRE_INTERVENTION
+  2020-05-26     PRE              7.9%        20.8%  PRE_INTERVENTION
+  2020-05-31     PRE              4.1%        16.3%  PRE_INTERVENTION
+  2020-06-05     PRE              0.0%        34.1%  PRE_INTERVENTION
+  2020-06-20     PRE              6.3%        28.9%  PRE_INTERVENTION
+  2020-06-25     PRE              0.0%         1.4%  PRE_INTERVENTION
+  2020-07-05     PRE              2.6%        21.7%  PRE_INTERVENTION
+  2020-07-10     PRE              4.5%        28.5%  PRE_INTERVENTION
+  2020-07-20     PRE              0.0%        26.1%  PRE_INTERVENTION
+  2020-07-25     PRE              4.3%        16.8%  PRE_INTERVENTION
+  2020-07-30     PRE              0.0%        10.8%  PRE_INTERVENTION
+  2020-09-03     PRE              3.4%        17.4%  PRE_INTERVENTION
+  2020-09-08     PRE              0.0%         6.8%  PRE_INTERVENTION
+  2020-09-13     PRE              0.0%         1.1%  PRE_INTERVENTION
+  2020-09-18     PRE              2.2%         2.3%  PRE_INTERVENTION
+  2020-09-28     PRE             19.8%        25.9%  PRE_INTERVENTION
+  2020-10-03     PRE              0.4%         8.7%  PRE_INTERVENTION
+  2020-10-08     PRE              0.0%         1.6%  PRE_INTERVENTION
+  2020-10-13     PRE             15.2%        54.7%  PRE_INTERVENTION
+  2020-10-23     PRE             28.0%        21.7%  PRE_INTERVENTION
+  2020-10-28     PRE              0.0%        39.8%  PRE_INTERVENTION
+  2020-11-02     PRE              0.0%        32.9%  PRE_INTERVENTION
+  2020-11-22     PRE              1.9%        13.7%  PRE_INTERVENTION
+  2020-11-27     PRE              0.0%        47.8%  PRE_INTERVENTION
+  2020-12-02     PRE             29.4%        19.5%  PRE_INTERVENTION
+  2020-12-07     PRE             28.1%        13.8%  PRE_INTERVENTION
+  2020-12-12     PRE              0.0%         3.6%  PRE_INTERVENTION
+  2020-12-17     PRE              0.1%        42.8%  PRE_INTERVENTION
+  2020-12-22     PRE              0.0%         7.2%  PRE_INTERVENTION
+  2020-12-27     PRE              5.9%        34.9%  PRE_INTERVENTION
+  2021-01-01     PRE              7.3%        57.5%  PRE_INTERVENTION
+  2021-01-06     PRE              0.0%         4.2%  PRE_INTERVENTION
+  2021-01-26     PRE              0.0%         4.7%  PRE_INTERVENTION
+  2021-01-31     PRE              0.0%         2.6%  PRE_INTERVENTION
+  2021-02-05     PRE              0.6%         1.2%  PRE_INTERVENTION
+  2021-02-10     PRE              0.0%        12.6%  PRE_INTERVENTION
+  2021-02-15     PRE              0.0%         1.5%  PRE_INTERVENTION
+  2021-02-20     PRE              0.0%        30.8%  PRE_INTERVENTION
+  2021-03-02     PRE              0.0%         5.7%  PRE_INTERVENTION
+  2021-03-07     PRE              3.1%        13.0%  PRE_INTERVENTION
+  2021-03-12     PRE              0.0%         1.1%  PRE_INTERVENTION
+  2021-03-22     PRE              0.0%        47.2%  PRE_INTERVENTION
+  2021-04-01     PRE              0.0%         6.4%  PRE_INTERVENTION
+  2021-04-06     PRE              0.0%         3.5%  PRE_INTERVENTION
+  2021-04-11     PRE              0.0%        12.3%  PRE_INTERVENTION
+  2021-04-26     PRE              0.1%        15.1%  PRE_INTERVENTION
+  2021-05-06     PRE             22.6%        37.4%  PRE_INTERVENTION
+  2021-05-16     PRE              0.0%         1.4%  PRE_INTERVENTION
+  2021-05-21     PRE              3.7%        20.9%  PRE_INTERVENTION
+  2021-05-26     PRE              0.1%        16.5%  PRE_INTERVENTION
+  2021-06-05     PRE              0.0%         2.0%  PRE_INTERVENTION
+  2021-06-10     PRE              0.0%         1.5%  PRE_INTERVENTION
+  2021-06-15     PRE              1.9%        49.2%  PRE_INTERVENTION
+  2021-06-20     PRE              0.0%         5.1%  PRE_INTERVENTION
+  2021-06-30     PRE             26.6%        24.0%  PRE_INTERVENTION
+  2021-07-05     PRE              6.9%         8.0%  PRE_INTERVENTION
+  2021-07-10     PRE              0.0%        47.7%  PRE_INTERVENTION
+  2021-07-20     PRE             11.3%        18.4%  PRE_INTERVENTION
+  2021-07-25     PRE              0.0%        15.7%  PRE_INTERVENTION
+  2021-08-04     PRE              0.0%         2.3%  PRE_INTERVENTION
+  2021-08-19     PRE              1.2%        22.7%  PRE_INTERVENTION
+  2021-08-24     PRE              0.6%         9.4%  PRE_INTERVENTION
+  2021-08-29     PRE              0.0%         1.2%  PRE_INTERVENTION
+  2021-09-03     PRE              0.0%        43.4%  PRE_INTERVENTION
+  2021-09-08     PRE              1.8%        29.3%  PRE_INTERVENTION
+  2021-09-13     PRE              0.0%         1.6%  PRE_INTERVENTION
+  2021-09-23     PRE              0.0%         1.0%  PRE_INTERVENTION
+  2021-09-28     PRE              0.0%        24.8%  PRE_INTERVENTION
+  2021-10-08     PRE              0.0%        46.5%  PRE_INTERVENTION
+  2021-10-13     PRE              0.0%        19.9%  PRE_INTERVENTION
+  2021-10-18     PRE             15.5%         5.4%  PRE_INTERVENTION
+  2021-10-23     PRE              0.0%         2.9%  PRE_INTERVENTION
+  2021-10-28     PRE             29.5%        27.8%  PRE_INTERVENTION
+  2021-11-07     PRE              2.8%        43.5%  PRE_INTERVENTION | NEAR_INTERVENTION
+  2021-11-17     PRE              0.0%         3.0%  PRE_INTERVENTION | NEAR_INTERVENTION
+  2021-11-27     PRE              5.1%        18.2%  PRE_INTERVENTION | NEAR_INTERVENTION
+  2021-12-02     PRE              0.0%         9.7%  PRE_INTERVENTION | NEAR_INTERVENTION
+  2021-12-07     PRE              0.0%         4.7%  PRE_INTERVENTION | NEAR_INTERVENTION
+  2021-12-12     PRE              0.0%         0.3%  PRE_INTERVENTION | NEAR_INTERVENTION
+  2021-12-22     PRE              0.0%         6.4%  PRE_INTERVENTION | NEAR_INTERVENTION
+  2021-12-27     PRE              0.0%         5.8%  PRE_INTERVENTION | NEAR_INTERVENTION
+  2022-01-01     POST           100.0%        67.2%  HIGH_AOI_CLOUD | POST_INTERVENTION | NEAR_INTERVENTION
+  2022-01-06     POST             0.0%         8.9%  POST_INTERVENTION | NEAR_INTERVENTION
+  2022-01-11     POST             0.0%        18.4%  POST_INTERVENTION | NEAR_INTERVENTION
+  2022-01-26     POST             0.0%         0.0%  POST_INTERVENTION | NEAR_INTERVENTION
+  2022-03-02     POST            24.8%        31.8%  POST_INTERVENTION | NEAR_INTERVENTION
+  2022-03-07     POST             0.0%         0.6%  POST_INTERVENTION
+  2022-03-12     POST             0.0%         0.0%  POST_INTERVENTION
+  2022-03-27     POST             0.0%         7.7%  POST_INTERVENTION
+  2022-04-01     POST             0.0%         1.3%  POST_INTERVENTION
+  2022-04-06     POST             0.0%         5.2%  POST_INTERVENTION
+  2022-04-11     POST             0.0%         3.6%  POST_INTERVENTION
+  2022-04-26     POST             0.0%        25.4%  POST_INTERVENTION
+  2022-05-01     POST            21.2%        55.6%  POST_INTERVENTION
+  2022-05-06     POST             0.0%        11.3%  POST_INTERVENTION
+  2022-05-11     POST             0.0%         1.0%  POST_INTERVENTION
+  2022-05-16     POST             0.0%         4.2%  POST_INTERVENTION
+  2022-05-21     POST             0.0%        13.3%  POST_INTERVENTION
+  2022-05-26     POST             0.0%        23.1%  POST_INTERVENTION
+  2022-05-31     POST             4.0%         6.9%  POST_INTERVENTION
+  2022-06-05     POST             1.5%        22.4%  POST_INTERVENTION
+  2022-06-15     POST             0.0%         0.6%  POST_INTERVENTION
+  2022-06-30     POST             0.0%         1.1%  POST_INTERVENTION
+  2022-07-05     POST            17.7%        31.8%  POST_INTERVENTION
+  2022-07-10     POST             0.0%        44.6%  POST_INTERVENTION
+  2022-07-20     POST             0.0%        22.4%  POST_INTERVENTION
+  2022-07-25     POST             0.0%         8.6%  POST_INTERVENTION
+  2022-07-30     POST             0.0%        28.3%  POST_INTERVENTION
+  2022-08-04     POST             0.0%        18.1%  POST_INTERVENTION
+  2022-08-14     POST            20.8%        32.3%  POST_INTERVENTION
+  2022-08-19     POST             0.0%        21.6%  POST_INTERVENTION
+  2022-08-24     POST             0.0%         2.2%  POST_INTERVENTION
+  2022-09-08     POST             0.0%        37.2%  POST_INTERVENTION
+  2022-09-18     POST             0.0%         2.2%  POST_INTERVENTION
+  2022-09-23     POST             0.0%         7.6%  POST_INTERVENTION
+  2022-09-28     POST             4.8%        54.6%  POST_INTERVENTION
+  2022-10-13     POST             0.0%         2.4%  POST_INTERVENTION
+  2022-10-23     POST             0.0%         2.7%  POST_INTERVENTION
+  2022-12-02     POST             0.0%         5.4%  POST_INTERVENTION
+  2022-12-07     POST             0.0%        47.5%  POST_INTERVENTION
+  2022-12-12     POST             9.1%        69.9%  POST_INTERVENTION
+  2023-01-01     POST             0.0%         0.3%  POST_INTERVENTION
+  2023-01-06     POST             0.0%         0.6%  POST_INTERVENTION
+  2023-01-11     POST             0.0%        11.3%  POST_INTERVENTION
+  2023-01-16     POST             0.0%         6.4%  POST_INTERVENTION
+  2023-01-21     POST             0.0%         0.0%  POST_INTERVENTION
+  2023-01-26     POST             0.0%        20.1%  POST_INTERVENTION
+  2023-01-31     POST             0.0%         0.8%  POST_INTERVENTION
+  2023-02-05     POST             0.0%         0.7%  POST_INTERVENTION
+  2023-02-10     POST             0.0%         5.5%  POST_INTERVENTION
+  2023-02-15     POST             0.0%         5.6%  POST_INTERVENTION
+  2023-02-20     POST             0.0%         0.0%  POST_INTERVENTION
+  2023-02-25     POST            26.1%         8.9%  POST_INTERVENTION
+  2023-04-11     POST             0.0%        18.2%  POST_INTERVENTION
+  2023-05-06     POST             0.0%         2.9%  POST_INTERVENTION
+  2023-05-11     POST            37.6%        15.1%  POST_INTERVENTION
+  2023-05-16     POST             0.0%         1.9%  POST_INTERVENTION
+  2023-05-21     POST             0.0%         2.2%  POST_INTERVENTION
+  2023-05-26     POST             0.0%        14.3%  POST_INTERVENTION
+  2023-06-15     POST            27.8%        25.2%  POST_INTERVENTION
+  2023-06-25     POST             3.1%        45.4%  POST_INTERVENTION
+  2023-07-05     POST             0.0%        33.1%  POST_INTERVENTION
+  2023-07-15     POST             0.0%         7.2%  POST_INTERVENTION
+  2023-07-20     POST            26.3%        41.0%  POST_INTERVENTION
+  2023-08-04     POST             0.2%        33.2%  POST_INTERVENTION
+  2023-08-14     POST             0.0%         1.6%  POST_INTERVENTION
+  2023-08-19     POST             0.0%        16.0%  POST_INTERVENTION
+  2023-08-24     POST             0.0%         0.7%  POST_INTERVENTION
+  2023-08-29     POST             0.0%         3.8%  POST_INTERVENTION
+  2023-09-03     POST             0.0%         0.5%  POST_INTERVENTION
+  2023-09-08     POST             0.0%         1.1%  POST_INTERVENTION
+  2023-09-13     POST             0.0%         1.1%  POST_INTERVENTION
+  2023-09-23     POST            13.0%         8.7%  POST_INTERVENTION
+  2023-10-03     POST             0.0%         7.5%  POST_INTERVENTION
+  2023-10-08     POST             0.0%        12.9%  POST_INTERVENTION
+  2023-10-13     POST             0.0%         3.9%  POST_INTERVENTION
+  2023-10-18     POST            28.5%        29.9%  POST_INTERVENTION
+  2023-10-23     POST             0.0%        14.6%  POST_INTERVENTION
+  2023-12-02     POST             0.0%        15.6%  POST_INTERVENTION
+  2023-12-07     POST             0.0%         9.0%  POST_INTERVENTION
+  2023-12-17     POST             0.0%         1.4%  POST_INTERVENTION
+  2023-12-22     POST             0.0%         5.1%  POST_INTERVENTION
+  2024-01-06     POST             7.6%        11.5%  POST_INTERVENTION
+  2024-01-26     POST             8.3%        13.5%  POST_INTERVENTION
+  2024-01-31     POST             0.0%        16.3%  POST_INTERVENTION
+  2024-02-20     POST             0.0%        13.9%  POST_INTERVENTION
+  2024-03-01     POST            34.6%        57.1%  POST_INTERVENTION
+  2024-03-06     POST            23.3%        31.8%  POST_INTERVENTION
+  2024-03-11     POST             0.0%         5.5%  POST_INTERVENTION
+  2024-03-16     POST             0.0%         1.8%  POST_INTERVENTION
+  2024-03-21     POST            34.8%        11.8%  POST_INTERVENTION
+  2024-03-26     POST            19.0%        60.4%  POST_INTERVENTION
+  2024-04-05     POST             0.0%        27.2%  POST_INTERVENTION
+  2024-04-30     POST             0.0%         4.3%  POST_INTERVENTION
+  2024-05-30     POST             0.0%         1.6%  POST_INTERVENTION
+  2024-06-04     POST             0.0%        10.4%  POST_INTERVENTION
+  2024-06-19     POST             0.0%        11.8%  POST_INTERVENTION
+  2024-07-04     POST             0.0%         2.6%  POST_INTERVENTION
+  2024-07-09     POST             0.0%         7.9%  POST_INTERVENTION
+  2024-07-14     POST             0.0%         4.3%  POST_INTERVENTION
+  2024-07-19     POST             0.1%        10.8%  POST_INTERVENTION
+  2024-07-24     POST            26.9%        44.6%  POST_INTERVENTION
+  2024-08-03     POST             0.0%        30.6%  POST_INTERVENTION
+  2024-08-08     POST             0.0%         7.8%  POST_INTERVENTION
+  2024-08-13     POST             0.0%         1.2%  POST_INTERVENTION
+  2024-08-23     POST             0.0%         6.2%  POST_INTERVENTION
+  2024-08-28     POST             0.0%         0.0%  POST_INTERVENTION
+  2024-09-07     POST             0.3%        41.0%  POST_INTERVENTION
+  2024-09-12     POST             8.2%         3.4%  POST_INTERVENTION
+  2024-09-17     POST             0.0%         3.2%  POST_INTERVENTION
+  2024-09-22     POST             0.0%        14.0%  POST_INTERVENTION
+  2024-09-27     POST             0.0%         2.5%  POST_INTERVENTION
+  2024-10-02     POST             0.0%        13.6%  POST_INTERVENTION
+  2024-10-07     POST            17.2%        44.5%  POST_INTERVENTION
+  2024-10-12     POST             9.1%        20.5%  POST_INTERVENTION
+  2024-10-17     POST             0.0%         6.9%  POST_INTERVENTION
+  2024-10-22     POST             3.4%         8.2%  POST_INTERVENTION
+  2024-11-06     POST             0.0%        53.7%  POST_INTERVENTION
+  2024-11-26     POST            12.3%        13.4%  POST_INTERVENTION
+  2024-12-01     POST            10.8%        37.3%  POST_INTERVENTION
+  2024-12-06     POST             0.4%        15.6%  POST_INTERVENTION
+  2024-12-11     POST             0.0%         3.5%  POST_INTERVENTION
+  2024-12-11     POST             0.0%         3.4%  POST_INTERVENTION
+
+EXCLUDED IMAGES  (80)  — did not reach stats output
+─────────────────────────────────────────────────────────────────
+  Note: 'in_clean_set' = passed cloud filters only.
+        Season filter is applied after; out-of-season images
+        can be cloud-clean yet still excluded from stats.
+
+  By reason:
+    Tile cloud > 70% (or AOI cloud > 40%):  80
+    Cloud-clean but out of season:                  0
+    Other:                                          0
+
+  Cloud-rejected  (80)
+  -----------------------------------------------------------------
+  Date           Pre/Post    AOI cloud   Tile cloud  Flags
+  2019-04-02     PRE            100.0%        36.1%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-05-12     PRE            100.0%        37.9%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-06-21     PRE             75.0%        16.0%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-09-14     PRE            100.0%        50.5%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-10-09     PRE            100.0%        54.2%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-10-19     PRE             57.5%        44.8%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-10-29     PRE             75.4%        55.9%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-11-13     PRE             78.4%        22.1%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-11-18     PRE             61.9%        24.6%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2019-12-08     PRE             47.8%        42.7%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-01-17     PRE             73.6%        34.2%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-03-02     PRE             86.8%        36.7%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-04-16     PRE            100.0%        38.5%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-04-21     PRE             95.7%        65.1%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-04-26     PRE            100.0%        33.6%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-05-11     PRE            100.0%        48.1%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-08-04     PRE             57.5%        58.0%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-08-19     PRE             76.5%        30.6%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-08-24     PRE             83.2%        35.4%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-09-23     PRE             40.0%        23.9%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2020-11-12     PRE             42.5%        20.0%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2021-01-16     PRE             50.4%        47.1%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2021-01-21     PRE            100.0%        46.7%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2021-03-17     PRE            100.0%        60.9%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2021-05-31     PRE             94.6%        10.7%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2021-06-25     PRE             91.6%        42.7%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2021-07-15     PRE             83.7%        60.5%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2021-08-14     PRE            100.0%        67.3%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2021-10-03     PRE            100.0%        69.2%  HIGH_AOI_CLOUD | PRE_INTERVENTION
+  2021-11-22     PRE            100.0%        69.1%  HIGH_AOI_CLOUD | PRE_INTERVENTION | NEAR_INTERVENTION
+  2022-02-10     POST            99.4%        69.9%  HIGH_AOI_CLOUD | POST_INTERVENTION | NEAR_INTERVENTION
+  2022-02-20     POST            73.9%        34.6%  HIGH_AOI_CLOUD | POST_INTERVENTION | NEAR_INTERVENTION
+  2022-03-17     POST           100.0%        68.1%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-03-22     POST            87.7%        18.3%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-06-10     POST            60.9%        20.8%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-07-15     POST            69.7%        56.4%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-08-09     POST            60.4%        24.5%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-09-03     POST            79.6%        54.8%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-09-13     POST            43.9%        48.4%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-10-03     POST            43.5%        58.6%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-10-18     POST            70.7%        33.3%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-10-28     POST           100.0%        28.7%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-11-02     POST           100.0%        59.6%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-11-22     POST           100.0%        68.0%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-11-27     POST           100.0%        67.7%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-12-17     POST            76.1%        44.0%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2022-12-22     POST            53.2%        38.4%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-03-02     POST            62.1%        34.3%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-03-17     POST           100.0%        36.9%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-03-22     POST           100.0%        66.5%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-03-27     POST            68.0%        37.3%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-04-06     POST           100.0%        55.5%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-04-16     POST            69.1%        56.3%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-04-26     POST            47.1%        45.4%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-05-31     POST            99.5%        65.4%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-06-10     POST           100.0%        41.8%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-06-20     POST           100.0%        51.0%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-07-10     POST            49.1%        19.2%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-07-25     POST           100.0%        42.9%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-07-30     POST            92.2%        21.8%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-09-28     POST           100.0%        43.2%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-11-12     POST            52.5%        32.0%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-11-17     POST           100.0%        50.8%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-11-27     POST            84.7%        49.8%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2023-12-12     POST           100.0%        44.0%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-01-11     POST           100.0%        55.4%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-01-16     POST            74.7%        51.9%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-02-05     POST           100.0%        58.1%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-02-10     POST            79.7%        37.6%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-04-10     POST            91.1%        31.9%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-04-15     POST            54.9%        44.3%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-04-20     POST            82.0%        28.5%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-05-05     POST            99.8%        38.3%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-05-10     POST            92.0%        33.3%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-05-15     POST           100.0%        63.7%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-05-20     POST            98.3%        34.1%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-05-25     POST           100.0%        24.4%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-10-27     POST            93.4%        62.6%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-12-16     POST           100.0%        47.2%  HIGH_AOI_CLOUD | POST_INTERVENTION
+  2024-12-26     POST            41.6%        30.3%  HIGH_AOI_CLOUD | POST_INTERVENTION
+
+STATISTICS COMPUTED
+─────────────────────────────────────────────────────────────────
+  Percentiles:  [10, 25, 50, 75, 90]
+  Mean:         yes
+  Std dev:      yes
+  Min/max:      yes
+
+═════════════════════════════════════════════════════════════════
